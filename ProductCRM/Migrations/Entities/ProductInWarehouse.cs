@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Text.Json.Serialization;
 
 namespace Migrations.Entities
 {
@@ -18,7 +19,10 @@ namespace Migrations.Entities
 
         public virtual Product Product { get; set; } = null!;
         public virtual Warehouse Warehouse { get; set; } = null!;
+        
+        [JsonIgnore]
         public virtual ICollection<ShipmentContent> ShipmentContents { get; set; }
+        [JsonIgnore]
         public virtual ICollection<Supply> Supplies { get; set; }
     }
 }

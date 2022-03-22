@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Text.Json.Serialization;
 
 namespace Migrations.Entities
 {
@@ -14,6 +15,7 @@ namespace Migrations.Entities
         public string Name { get; set; } = null!;
         public string? ColorHex { get; set; }
 
+        [JsonIgnore]
         public virtual ICollection<ProductCategory> ProductCategories { get; set; }
     }
 }

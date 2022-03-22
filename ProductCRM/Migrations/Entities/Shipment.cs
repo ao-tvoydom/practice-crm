@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Text.Json.Serialization;
 
 namespace Migrations.Entities
 {
@@ -16,6 +17,7 @@ namespace Migrations.Entities
         public DateTime ShipmentEndDate { get; set; }
         public string ContactPhone { get; set; } = null!;
 
+        [JsonIgnore]
         public virtual ICollection<ShipmentContent> ShipmentContents { get; set; }
     }
 }
