@@ -13,46 +13,46 @@ namespace ProductCRM.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class ProductController : ControllerBase
+    public class SupplyController : ControllerBase
     {
         private readonly CRMDbContext _context;
 
-        public ProductController(CRMDbContext context)
+        public SupplyController(CRMDbContext context)
         {
             _context = context;
         }
 
-        // GET: api/Product
+        // GET: api/Supply
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Product>>> GetProducts()
+        public async Task<ActionResult<IEnumerable<Supply>>> GetSupplies()
         {
-            return await _context.Products.ToListAsync();
+            return await _context.Supplies.ToListAsync();
         }
 
-        // GET: api/Product/5
+        // GET: api/Supply/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<Product>> GetProduct(int id)
+        public async Task<ActionResult<Supply>> GetSupply(int id)
         {
-            var product = await _context.Products.FindAsync(id);
+            var supply = await _context.Supplies.FindAsync(id);
 
-            if (product == null)
+            if (supply == null)
             {
                 return NotFound();
             }
 
-            return product;
+            return supply;
         }
 
-        // PUT: api/Product/5
+        // PUT: api/Supply/5
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutProduct(int id, Product product)
+        public async Task<IActionResult> PutSupply(int id, Supply supply)
         {
-            if (id != product.ProductId)
+            if (id != supply.SupplyId)
             {
                 return BadRequest();
             }
 
-            _context.Entry(product).State = EntityState.Modified;
+            _context.Entry(supply).State = EntityState.Modified;
 
             try
             {
@@ -60,7 +60,7 @@ namespace ProductCRM.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!ProductExists(id))
+                if (!SupplyExists(id))
                 {
                     return NotFound();
                 }
@@ -73,35 +73,35 @@ namespace ProductCRM.Controllers
             return NoContent();
         }
 
-        // POST: api/Product
+        // POST: api/Supply
         [HttpPost]
-        public async Task<ActionResult<Product>> PostProduct(Product product)
+        public async Task<ActionResult<Supply>> PostSupply(Supply supply)
         {
-            _context.Products.Add(product);
+            _context.Supplies.Add(supply);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetProduct", new { id = product.ProductId }, product);
+            return CreatedAtAction("GetSupply", new { id = supply.SupplyId }, supply);
         }
 
-        // DELETE: api/Product/5
+        // DELETE: api/Supply/5
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteProduct(int id)
+        public async Task<IActionResult> DeleteSupply(int id)
         {
-            var product = await _context.Products.FindAsync(id);
-            if (product == null)
+            var supply = await _context.Supplies.FindAsync(id);
+            if (supply == null)
             {
                 return NotFound();
             }
 
-            _context.Products.Remove(product);
+            _context.Supplies.Remove(supply);
             await _context.SaveChangesAsync();
 
             return NoContent();
         }
 
-        private bool ProductExists(int id)
+        private bool SupplyExists(int id)
         {
-            return _context.Products.Any(e => e.ProductId == id);
+            return _context.Supplies.Any(e => e.SupplyId == id);
         }
     }
 }

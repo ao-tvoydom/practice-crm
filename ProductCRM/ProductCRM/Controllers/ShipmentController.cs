@@ -13,46 +13,46 @@ namespace ProductCRM.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class ProductController : ControllerBase
+    public class ShipmentController : ControllerBase
     {
         private readonly CRMDbContext _context;
 
-        public ProductController(CRMDbContext context)
+        public ShipmentController(CRMDbContext context)
         {
             _context = context;
         }
 
-        // GET: api/Product
+        // GET: api/Shipment
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Product>>> GetProducts()
+        public async Task<ActionResult<IEnumerable<Shipment>>> GetShipments()
         {
-            return await _context.Products.ToListAsync();
+            return await _context.Shipments.ToListAsync();
         }
 
-        // GET: api/Product/5
+        // GET: api/Shipment/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<Product>> GetProduct(int id)
+        public async Task<ActionResult<Shipment>> GetShipment(int id)
         {
-            var product = await _context.Products.FindAsync(id);
+            var shipment = await _context.Shipments.FindAsync(id);
 
-            if (product == null)
+            if (shipment == null)
             {
                 return NotFound();
             }
 
-            return product;
+            return shipment;
         }
 
-        // PUT: api/Product/5
+        // PUT: api/Shipment/5
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutProduct(int id, Product product)
+        public async Task<IActionResult> PutShipment(int id, Shipment shipment)
         {
-            if (id != product.ProductId)
+            if (id != shipment.ShipmentId)
             {
                 return BadRequest();
             }
 
-            _context.Entry(product).State = EntityState.Modified;
+            _context.Entry(shipment).State = EntityState.Modified;
 
             try
             {
@@ -60,7 +60,7 @@ namespace ProductCRM.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!ProductExists(id))
+                if (!ShipmentExists(id))
                 {
                     return NotFound();
                 }
@@ -73,35 +73,35 @@ namespace ProductCRM.Controllers
             return NoContent();
         }
 
-        // POST: api/Product
+        // POST: api/Shipment
         [HttpPost]
-        public async Task<ActionResult<Product>> PostProduct(Product product)
+        public async Task<ActionResult<Shipment>> PostShipment(Shipment shipment)
         {
-            _context.Products.Add(product);
+            _context.Shipments.Add(shipment);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetProduct", new { id = product.ProductId }, product);
+            return CreatedAtAction("GetShipment", new { id = shipment.ShipmentId }, shipment);
         }
 
-        // DELETE: api/Product/5
+        // DELETE: api/Shipment/5
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteProduct(int id)
+        public async Task<IActionResult> DeleteShipment(int id)
         {
-            var product = await _context.Products.FindAsync(id);
-            if (product == null)
+            var shipment = await _context.Shipments.FindAsync(id);
+            if (shipment == null)
             {
                 return NotFound();
             }
 
-            _context.Products.Remove(product);
+            _context.Shipments.Remove(shipment);
             await _context.SaveChangesAsync();
 
             return NoContent();
         }
 
-        private bool ProductExists(int id)
+        private bool ShipmentExists(int id)
         {
-            return _context.Products.Any(e => e.ProductId == id);
+            return _context.Shipments.Any(e => e.ShipmentId == id);
         }
     }
 }
