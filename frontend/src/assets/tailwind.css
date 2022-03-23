@@ -13,3 +13,7 @@ html, body {
 #app {
     height: 100%;
 }
+
+.content {
+    min-height: calc(100vh - 8.1rem);
+}
