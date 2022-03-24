@@ -4,13 +4,14 @@
     <div class="text-2xl m-2 cursor-pointer hover:text-primary" v-on:click="currentTab='products'">Товары</div>
     <div class="text-2xl m-2 cursor-pointer hover:text-primary" v-on:click="currentTab='storages'">Склады</div>
     <div class="text-2xl m-2 cursor-pointer hover:text-primary" v-on:click="currentTab='supplys'">Поставки</div>
-    <div class="text-2xl m-2 cursor-pointer hover:text-primary" >Отгрузки</div>
+    <div class="text-2xl m-2 cursor-pointer hover:text-primary" v-on:click="currentTab='shipments'">Отгрузки</div>
   </header>
 
   <div class="m-2 flex-grow" >
     <ProductsPage v-if=" currentTab==='products' "></ProductsPage>
     <SupplysPage v-if=" currentTab==='supplys' "></SupplysPage>
     <StoragesPage v-if=" currentTab==='storages' "></StoragesPage>
+    <ShipmentsPage v-if=" currentTab==='shipments' "></ShipmentsPage>
   </div>
 
   <footer class="fixed bottom-0 footer items-center p-4 bg-neutral text-neutral-content">
@@ -22,6 +23,7 @@
 import ProductsPage from "@/components/ProductsPage";
 import SupplysPage from "@/components/SupplysPage";
 import StoragesPage from "@/components/StoragesPage";
+import ShipmentsPage from "@/components/ShipmentsPage";
 
 
 export default {
@@ -34,7 +36,8 @@ export default {
   components: {
     ProductsPage,
     SupplysPage,
-    StoragesPage
+    StoragesPage,
+    ShipmentsPage
   }
 }
 </script>
