@@ -7,13 +7,18 @@
 }
 
 html, body {
-    height: 100%;
+    min-height: 100vh;
 }
 
 #app {
-    height: 100%;
+    min-height: 100vh;
 }
 
 .content {
     min-height: calc(100vh - 8.1rem);
+}
+
+.products-table {
+    display: grid;
+    grid-template-columns: repeat(5, minmax(0, 1fr)) max-content;
 }

@@ -1,18 +1,32 @@
 <template>
-  <table class="w-full">
-    <div class="text-3xl">Поставки</div>
-    <tr>
-      <th class="border-2">Товар</th>
-      <th class="border-2">Поставщик</th>
-      <th class="border-2">Количество</th>
-      <th class="border-2">Дата</th>
-    </tr>
-    <tr v-for="supply in supplys" :key="supply.product_title">
-      <td class="border-2 p-1" >{{ supply.product_title }}</td>
-      <td class="border-2 p-1">{{ supply.supplier_name }}</td>
-      <td class="border-2 p-1">{{ supply.amount }}</td>
-      <td class="border-2 p-1">{{ supply.date }}</td>
-    </tr>
+  <div class="text-3xl">Поставки</div>
+  <table class="table table-zebra w-full">
+    <thead>
+      <tr>
+        <th>Товар</th>
+        <th>Поставщик</th>
+        <th>Количество</th>
+        <th>Дата</th>
+        <th>Действия</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr v-for="supply in supplys" :key="supply.product_title">
+        <td>{{ supply.product_title }}</td>
+        <td>{{ supply.supplier_name }}</td>
+        <td>{{ supply.amount }}</td>
+        <td>{{ supply.date }}</td>
+        <td>
+          <div class="dropdown dropdown-end">
+            <label tabindex="0" class="btn m-1 p-2 rounded">...</label>
+            <ul tabindex="0" class="dropdown-content menu p-2 shadow bg-base-100 rounded w-52">
+              <li><a>Изменить</a></li>
+              <li><a>Удалить</a></li>
+            </ul>
+          </div>
+        </td>
+      </tr>
+    </tbody>
   </table>
 </template>
 
