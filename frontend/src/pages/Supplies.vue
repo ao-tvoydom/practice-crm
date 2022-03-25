@@ -1,5 +1,5 @@
 <template>
-  <div class="text-3xl">Поставки</div>
+  <div class="text-3xl mb-2">Поставки</div>
   <table class="table table-zebra w-full">
     <thead>
       <tr>
@@ -18,7 +18,7 @@
         <td>{{ supply.date }}</td>
         <td>
           <div class="dropdown dropdown-end">
-            <label tabindex="0" class="btn m-1 p-2 rounded">...</label>
+            <label tabindex="0" class="btn btn-primary m-1 p-2 rounded">...</label>
             <ul tabindex="0" class="dropdown-content menu p-2 shadow bg-base-100 rounded w-52">
               <li><a>Изменить</a></li>
               <li><a>Удалить</a></li>
