@@ -40,13 +40,13 @@ export default {
     return {
       products: [
         { productId: 1, name: "САХАР", weight: 100, height: 20, width: 20, length: 5 },
-        { productId: 1, name: "САХАР", weight: 100, height: 20, width: 20, length: 5 },
-        { productId: 1, name: "САХАР", weight: 100, height: 20, width: 20, length: 5 },
-        { productId: 1, name: "САХАР", weight: 100, height: 20, width: 20, length: 5 },
-        { productId: 1, name: "САХАР", weight: 100, height: 20, width: 20, length: 5 },
-        { productId: 1, name: "САХАР", weight: 100, height: 20, width: 20, length: 5 },
-        { productId: 1, name: "САХАР", weight: 100, height: 20, width: 20, length: 5 },
-        { productId: 1, name: "САХАР", weight: 100, height: 20, width: 20, length: 5 },
+        { productId: 2, name: "САХАР", weight: 100, height: 20, width: 20, length: 5 },
+        { productId: 3, name: "САХАР", weight: 100, height: 20, width: 20, length: 5 },
+        { productId: 4, name: "САХАР", weight: 100, height: 20, width: 20, length: 5 },
+        { productId: 5, name: "САХАР", weight: 100, height: 20, width: 20, length: 5 },
+        { productId: 6, name: "САХАР", weight: 100, height: 20, width: 20, length: 5 },
+        { productId: 7, name: "САХАР", weight: 100, height: 20, width: 20, length: 5 },
+        { productId: 8, name: "САХАР", weight: 100, height: 20, width: 20, length: 5 },
       ]
     }
   }

@@ -42,7 +42,7 @@ export default {
   data() {
     return {
       product: {
-        productId: 1,
+        productId: this.$route.params.id,
         name: "САХАР",
         weight: 100,
         height: 20,
