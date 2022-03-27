@@ -58,7 +58,6 @@ export default {
   },
   created() {
     axios.get('/Product').then((response) => this.products = response.data)
-    console.log(process.env.VUE_APP_BASE_URL)
   }
 
 }

@@ -23,16 +23,21 @@
 </template>
 
 <script>
+import axios from "@/axios";
+
 export default {
   name: "StoragePage",
   data() {
     return {
       storage: {
         storageId: this.$route.params.id,
-        name: "Склад 1",
-        address: "Рязанский проспект 11А",
+        name: "",
+        address: "",
       }
     }
+  },
+  created() {
+    axios.get(`/Storage/${this.storage.storageId}`).then((response) => this.storage = response.data)
   }
 }
 </script>

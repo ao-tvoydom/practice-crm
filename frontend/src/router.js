@@ -8,6 +8,7 @@ import EditStorage from "@/pages/storages/EditStorage";
 import Supplies from "@/pages/Supplies";
 import EditProduct from "@/pages/products/EditProduct";
 import CreateProduct from "@/pages/products/CreateProduct";
+import CreateStorage from "@/pages/storages/CreateStorage";
 
 export default createRouter({
     routes: [
@@ -20,6 +21,7 @@ export default createRouter({
         { path: '/storages', component:  Storages },
         { path: '/storage/:id', component:  Storage },
         { path: '/storage/:id/edit', component:  EditStorage },
+        { path: '/storage', component:  CreateStorage },
 
         { path: '/shipments', component:  Shipments },
         { path: '/storages', component:  Storages },
