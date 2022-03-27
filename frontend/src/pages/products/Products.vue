@@ -1,5 +1,9 @@
 <template>
-  <div class="text-3xl mb-2">Товары</div>
+  <div class="flex items-center mb-2 align-middle">
+    <div class="text-3xl mb-2">Товары</div>
+    <button class="btn btn-square btn-primary btn-sm ml-2" @click="this.$router.push(`/product`)">+</button>
+  </div>
+
   <table class="table table-zebra w-full">
     <thead>
       <tr>
@@ -20,10 +24,11 @@
         <td>{{ product.length }}</td>
         <td>
           <div class="dropdown dropdown-end">
-            <label tabindex="0" class="btn btn-primary m-1 p-2 rounded">...</label>
+            <label tabindex="0" class="btn btn-square btn-sm btn-primary m-1 p-2">...</label>
             <ul tabindex="0" class="dropdown-content menu p-2 shadow bg-base-100 rounded w-52">
               <li><router-link :to="`/product/${product.productId}`">Подробнее</router-link></li>
-              <li><router-link :to="`/product/${product.productId}}/edit`">Редактировать</router-link></li>
+              <li><router-link :to="`/product/${product.productId}/edit`">Редактировать</router-link></li>
+              <li><a class="text-error" @click="deleteProduct(product.productId)">Удалить</a></li>
             </ul>
           </div>
         </td>
@@ -33,22 +38,27 @@
 </template>
 
 <script>
+import axios from "@/axios";
 
 export default {
   name: "ProductsPage",
   data() {
     return {
-      products: [
-        { productId: 1, name: "САХАР", weight: 100, height: 20, width: 20, length: 5 },
-        { productId: 2, name: "САХАР", weight: 100, height: 20, width: 20, length: 5 },
-        { productId: 3, name: "САХАР", weight: 100, height: 20, width: 20, length: 5 },
-        { productId: 4, name: "САХАР", weight: 100, height: 20, width: 20, length: 5 },
-        { productId: 5, name: "САХАР", weight: 100, height: 20, width: 20, length: 5 },
-        { productId: 6, name: "САХАР", weight: 100, height: 20, width: 20, length: 5 },
-        { productId: 7, name: "САХАР", weight: 100, height: 20, width: 20, length: 5 },
-        { productId: 8, name: "САХАР", weight: 100, height: 20, width: 20, length: 5 },
-      ]
+      products: []
     }
+  },
+  methods: {
+    deleteProduct(id) {
+      axios.delete(`/Product/${id}`).then(() => {
+        this.products = this.products.filter(function (product) {
+          return product.productId !== id
+        })
+      })
+    }
+  },
+  created() {
+    axios.get('/Product').then((response) => this.products = response.data)
+    console.log(process.env.VUE_APP_BASE_URL)
   }
 
 }
