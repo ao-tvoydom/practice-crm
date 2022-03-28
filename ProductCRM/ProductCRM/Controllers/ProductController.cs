@@ -43,7 +43,10 @@ namespace ProductCRM.Controllers
             return product;
         }
 
-        // PUT: api/Product/5
+        /// <summary>
+        /// Update a specific product by unique id |
+        /// categoryIdArray - Optional
+        /// </summary>
         [HttpPut("{id}")]
         public async Task<IActionResult> PutProduct(int id, Product product)
         {
@@ -53,7 +56,29 @@ namespace ProductCRM.Controllers
             }
 
             _context.Entry(product).State = EntityState.Modified;
+            
+            if (product.CategoryIdArray is not null)
+            {
 
+                if (product.CategoryIdArray.Except(_context.Categories.Select(c => c.CategoryId)).Any())
+                {
+                    return BadRequest("Specified category id does not exist");
+                }
+                
+                
+                foreach (var category in _context.ProductCategories.Where(c=> c.ProductId == product.ProductId))
+                {
+                    _context.ProductCategories.Remove(category);
+                }
+                
+                foreach (var categoryId in product.CategoryIdArray)
+                {
+                    _context.ProductCategories.Add(new ProductCategory()
+                          {CategoryId = categoryId, ProductId = product.ProductId});
+                }
+                  
+            }
+            
             try
             {
                 await _context.SaveChangesAsync();
@@ -73,13 +98,36 @@ namespace ProductCRM.Controllers
             return NoContent();
         }
 
+        /// <summary>
+        /// Add new product |
+        /// categoryIdArray - Optional
+        /// </summary>
         // POST: api/Product
         [HttpPost]
-        public async Task<ActionResult<Product>> PostProduct(Product product)
+        public async Task<ActionResult<Product>> PostProduct( Product product)
         {
+            
+            
             _context.Products.Add(product);
-            await _context.SaveChangesAsync();
 
+            await _context.SaveChangesAsync();
+            
+            if (product.CategoryIdArray is not null)
+            {
+                if (product.CategoryIdArray.Except(_context.Categories.Select(c => c.CategoryId)).Any())
+                {
+                    return BadRequest("Specified category id does not exist");
+                }
+                
+                foreach (var categoryId in product.CategoryIdArray)
+                {
+                    _context.ProductCategories.Add(new ProductCategory()
+                        {CategoryId = categoryId, ProductId = product.ProductId});
+                }
+            }
+            
+            await _context.SaveChangesAsync();
+            
             return CreatedAtAction("GetProduct", new { id = product.ProductId }, product);
         }
 

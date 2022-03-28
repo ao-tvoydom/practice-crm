@@ -53,6 +53,8 @@ namespace Migrations.Context
             {
                 entity.ToTable("Product");
 
+                entity.Ignore(c => c.CategoryIdArray);
+                
                 entity.Property(e => e.Name).HasMaxLength(75);
             });
 
