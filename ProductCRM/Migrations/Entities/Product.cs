@@ -19,7 +19,7 @@ namespace Migrations.Entities
         public int Width { get; set; }
         public int Length { get; set; }
 
-        [JsonIgnore]
+        
         public virtual ICollection<ProductCategory> ProductCategories { get; set; }
         
         [JsonIgnore]

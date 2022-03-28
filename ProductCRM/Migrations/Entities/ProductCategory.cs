@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Text.Json.Serialization;
 
 namespace Migrations.Entities
 {
@@ -10,6 +11,8 @@ namespace Migrations.Entities
         public int CategoryId { get; set; }
 
         public virtual Category Category { get; set; } = null!;
+        
+        [JsonIgnore]
         public virtual Product Product { get; set; } = null!;
     }
 }
