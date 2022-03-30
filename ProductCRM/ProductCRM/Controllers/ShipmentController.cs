@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Castle.Core.Internal;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -27,6 +28,50 @@ namespace ProductCRM.Controllers
         public async Task<ActionResult<IEnumerable<Shipment>>> GetShipments()
         {
             return await _context.Shipments.ToListAsync();
+        }
+        
+        //[Route("ShipmentsByMonth/{monthNumber}")]
+        [HttpGet("ShipmentsByMonth/{monthNumber}")]
+        public async Task<ActionResult<IEnumerable<Shipment>>> GetShipmentsByMonth(int monthNumber)
+        {
+            var shipments = await _context.Shipments.Where(s=>s.ShipmentEndDate.Month == monthNumber).ToListAsync();
+
+            if (shipments.IsNullOrEmpty())
+            {
+                return NotFound();
+            }
+
+            return shipments;
+        }
+        
+        //[Route("ShipmentsInLastHalfYear")]
+        [HttpGet("ShipmentsInLastHalfYear")]
+        public async Task<ActionResult<IEnumerable<Shipment>>> GetShipmentsInLastHalfYear()
+        {
+            var shipments = await _context.Shipments
+                .Where(s=>s.ShipmentEndDate > DateTime.Now.AddMonths(-6))
+                .ToListAsync();
+
+            if (shipments.IsNullOrEmpty())
+            {
+                return NotFound();
+            }
+
+            return shipments;
+        }
+        
+        //[Route("ShipmentsByYear/{yearNumber}")]
+        [HttpGet("ShipmentsByYear/{yearNumber}")]
+        public async Task<ActionResult<IEnumerable<Shipment>>> GetShipmentsByYear(int yearNumber)
+        {
+            var shipments =  await _context.Shipments.Where(s=>s.ShipmentEndDate.Year == yearNumber).ToListAsync();
+            
+            if (shipments.IsNullOrEmpty())
+            {
+                return NotFound();
+            }
+
+            return shipments;
         }
 
         // GET: api/Shipment/5

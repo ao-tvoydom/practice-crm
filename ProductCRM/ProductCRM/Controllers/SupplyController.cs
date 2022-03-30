@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Castle.Core.Internal;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -41,6 +42,51 @@ namespace ProductCRM.Controllers
             }
 
             return supply;
+        }
+        
+        
+        //[Route("SuppliesByMonth/{monthNumber}")]
+        [HttpGet("SuppliesByMonth/{monthNumber}")]
+        public async Task<ActionResult<IEnumerable<Supply>>> GetSuppliesByMonth(int monthNumber)
+        {
+            var supplies =  await _context.Supplies.Where(s=>s.Date.Month == monthNumber).ToListAsync();
+            
+            if (supplies.IsNullOrEmpty())
+            {
+                return NotFound();
+            }
+
+            return supplies;
+        }
+        
+        //[Route("SuppliesInLastHalfYear")]
+        [HttpGet("SuppliesInLastHalfYear")]
+        public async Task<ActionResult<IEnumerable<Supply>>> GetSuppliesInLastHalfYear()
+        {
+            var supplies =  await _context.Supplies
+                .Where(s=>s.Date > DateTime.Now.AddMonths(-6))
+                .ToListAsync();
+            
+            if (supplies.IsNullOrEmpty())
+            {
+                return NotFound();
+            }
+
+            return supplies;
+        }
+        
+        //[Route("SuppliesByYear/{yearNumber}")]
+        [HttpGet("SuppliesByYear/{yearNumber}")]
+        public async Task<ActionResult<IEnumerable<Supply>>> GetSuppliesByYear(int yearNumber)
+        {
+            var supplies =  await _context.Supplies.Where(s=>s.Date.Year == yearNumber).ToListAsync();
+            
+            if (supplies.IsNullOrEmpty())
+            {
+                return NotFound();
+            }
+
+            return supplies;
         }
 
         // PUT: api/Supply/5
