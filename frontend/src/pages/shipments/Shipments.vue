@@ -1,6 +1,10 @@
 <template>
-  <div class="text-3xl mb-2">Отгрузки</div>
+  <div class="flex items-center mb-2 align-middle">
+    <div class="text-3xl mb-2">Отгрузки</div>
+    <button class="btn btn-square btn-primary btn-sm ml-2" @click="this.$router.push(`/shipment`)">+</button>
+  </div>
   <table class="table table-zebra w-full">
+
     <thead>
     <tr>
       <th>Товар</th>
@@ -36,7 +40,7 @@
 
 <script>
 export default {
-  name: "StoragesPage",
+  name: "ShipmentPage",
   data() {
     return {
       shipments: [
