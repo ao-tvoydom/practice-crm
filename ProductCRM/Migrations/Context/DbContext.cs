@@ -26,6 +26,8 @@ namespace Migrations.Context
         public virtual DbSet<Supply> Supplies { get; set; } = null!;
         public virtual DbSet<Warehouse> Warehouses { get; set; } = null!;
 
+        public virtual DbSet<User> Users { get; set; } = null!;
+
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             if (!optionsBuilder.IsConfigured)
@@ -47,6 +49,17 @@ namespace Migrations.Context
                     .HasColumnName("ColorHEX");
 
                 entity.Property(e => e.Name).HasMaxLength(40);
+            });
+
+            modelBuilder.Entity<User>(entity =>
+            {
+                entity.ToTable("User");
+
+                entity.Property(e => e.Login).HasMaxLength(120);
+
+                entity.Property(e => e.Password).HasMaxLength(45);
+                entity.Property(e => e.Role).HasMaxLength(30);
+                
             });
 
             modelBuilder.Entity<Product>(entity =>

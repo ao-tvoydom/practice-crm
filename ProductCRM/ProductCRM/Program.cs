@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
 using Migrations.Context;
@@ -13,9 +14,18 @@ builder.Services.AddSwaggerGen(c =>
     c.IncludeXmlComments(filePath);
 });
 
+builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+    .AddCookie(options =>
+    {
+        options.LoginPath = new Microsoft.AspNetCore.Http.PathString("/Account/Login");
+    });
+
+
 var app = builder.Build();
 
 
+app.UseAuthentication();
+app.UseAuthorization();
 app.UseSwagger();
 app.UseSwaggerUI(c =>
 {

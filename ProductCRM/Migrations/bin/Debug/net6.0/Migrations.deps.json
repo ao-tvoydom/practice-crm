@@ -9,6 +9,7 @@
       "Migrations/1.0.0": {
         "dependencies": {
           "Microsoft.EntityFrameworkCore": "7.0.0-preview.2.22153.1",
+          "Microsoft.EntityFrameworkCore.Design": "7.0.0-preview.2.22153.1",
           "Microsoft.EntityFrameworkCore.Proxies": "7.0.0-preview.2.22153.1",
           "Microsoft.EntityFrameworkCore.SqlServer": "7.0.0-preview.2.22153.1"
         },
@@ -67,6 +68,14 @@
           "lib/netstandard1.5/Castle.Core.dll": {
             "assemblyVersion": "4.0.0.0",
             "fileVersion": "4.4.1.0"
+          }
+        }
+      },
+      "Humanizer.Core/2.13.14": {
+        "runtime": {
+          "lib/net6.0/Humanizer.dll": {
+            "assemblyVersion": "2.13.0.0",
+            "fileVersion": "2.13.14.5656"
           }
         }
       },
@@ -169,6 +178,18 @@
         }
       },
       "Microsoft.EntityFrameworkCore.Analyzers/7.0.0-preview.2.22153.1": {},
+      "Microsoft.EntityFrameworkCore.Design/7.0.0-preview.2.22153.1": {
+        "dependencies": {
+          "Humanizer.Core": "2.13.14",
+          "Microsoft.EntityFrameworkCore.Relational": "7.0.0-preview.2.22153.1"
+        },
+        "runtime": {
+          "lib/net6.0/Microsoft.EntityFrameworkCore.Design.dll": {
+            "assemblyVersion": "7.0.0.0",
+            "fileVersion": "7.0.22.15301"
+          }
+        }
+      },
       "Microsoft.EntityFrameworkCore.Proxies/7.0.0-preview.2.22153.1": {
         "dependencies": {
           "Castle.Core": "4.4.1",
@@ -1329,6 +1350,13 @@
       "path": "castle.core/4.4.1",
       "hashPath": "castle.core.4.4.1.nupkg.sha512"
     },
+    "Humanizer.Core/2.13.14": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-icZ3IcfmoIn5bQvYiZChRZ6jPn1HpjxQ+XzE5JFh8hp3MyvF1MmKvnc6htPBdW/FSmCotRzzRV6/tptjq/Aylw==",
+      "path": "humanizer.core/2.13.14",
+      "hashPath": "humanizer.core.2.13.14.nupkg.sha512"
+    },
     "Microsoft.Bcl.AsyncInterfaces/1.0.0": {
       "type": "package",
       "serviceable": true,
@@ -1377,6 +1405,13 @@
       "sha512": "sha512-oFOUgIQ+GBWkAvlR6xKqEPXJqCVnkUlnKb/Fo87jB8fMAYyPr46gc7MYdZ9ra5V0xUSxmYNna5MSr8rOpuwuNQ==",
       "path": "microsoft.entityframeworkcore.analyzers/7.0.0-preview.2.22153.1",
       "hashPath": "microsoft.entityframeworkcore.analyzers.7.0.0-preview.2.22153.1.nupkg.sha512"
+    },
+    "Microsoft.EntityFrameworkCore.Design/7.0.0-preview.2.22153.1": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-dLhrm75BtNuKai+stZLhVWOoD9VABph+UlbaSwhdpSMeMpmkC8Iq1/m5+ubyFgKFyreOG/zeeeBuyMuMAv2uOw==",
+      "path": "microsoft.entityframeworkcore.design/7.0.0-preview.2.22153.1",
+      "hashPath": "microsoft.entityframeworkcore.design.7.0.0-preview.2.22153.1.nupkg.sha512"
     },
     "Microsoft.EntityFrameworkCore.Proxies/7.0.0-preview.2.22153.1": {
       "type": "package",
