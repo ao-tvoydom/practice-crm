@@ -39,10 +39,25 @@
     
     <button class="btn btn-primary mt-4" @click="this.$router.push(`/product/${product.productId}/edit`)">Редактировать</button>
   </div>
+  <div class="form-control w-full">
+    <label class="label">
+      <span class="label-text text-neutral-content">Категории</span>
+    </label>
+    <Multiselect
+        v-model="product.categoryIdArray"
+        :close-on-select="false"
+        :options="categories"
+        disabled
+        mode="tags"
+        :classes="multiselectClasses"
+    />
+  </div>
 </template>
 
 <script>
 import axios from "@/axios";
+import Multiselect from "@vueform/multiselect";
+import multiselectClasses from "@/assets/multiselect-classes";
 
 export default {
   name: "ProductPage",
@@ -50,11 +65,27 @@ export default {
     return {
       product: {
         productId: this.$route.params.id,
-      }
+        name: "",
+        weight: "",
+        height: "",
+        width: "",
+        length: "",
+        categoryIdArray: []
+      },
+      categories: [],
+      multiselectClasses
     }
+  },
+  components: {
+    Multiselect
   },
   created() {
     axios.get(`/Product/${this.product.productId}`).then((response) => this.product = response.data)
+    axios.get('/Category').then((response) => {
+      this.categories = response.data.map((category) => {
+        return { value: category.categoryId, label: category.name }
+      })
+    })
   }
 }
 </script>

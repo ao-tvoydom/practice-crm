@@ -44,7 +44,7 @@ export default {
   name: "ProductsPage",
   data() {
     return {
-      products: []
+      products: [],
     }
   },
   methods: {
@@ -62,3 +62,4 @@ export default {
 
 }
 </script>
+

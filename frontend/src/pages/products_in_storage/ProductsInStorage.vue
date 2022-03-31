@@ -83,6 +83,9 @@ export default {
   created() {
     axios.get('/ProductInWarehouse').then((response) => this.productsInStorage = response.data)
   }
+<<<<<<< HEAD
 
+=======
+>>>>>>> d7b32f4 (categoies assigment)
 }
 </script>
