@@ -16,6 +16,7 @@ import CreateCategory from "@/pages/categories/CreateCategory";
 import ProductsInStorage from "@/pages/products_in_storage/ProductsInStorage";
 import ProductInStorage from "@/pages/products_in_storage/ProductInStorage";
 import EditProductInStorage from "@/pages/products_in_storage/EditProductInStorage";
+import Login from "@/pages/Login";
 
 export default createRouter({
     routes: [
@@ -42,6 +43,8 @@ export default createRouter({
         { path: '/shipments', component:  Shipments },
         { path: '/storages', component:  Storages },
         { path: '/supplies', component:  Supplies },
+
+        { path: '/login', component:  Login }
     ],
     history: createWebHashHistory()
 })

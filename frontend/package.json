@@ -10,6 +10,7 @@
   "dependencies": {
     "@vueform/multiselect": "^2.3.3",
     "autoprefixer": "^10.4.4",
+    "axios": "^0.26.1",
     "core-js": "^3.8.3",
     "daisyui": "^2.13.0",
     "postcss": "^8.4.12",
