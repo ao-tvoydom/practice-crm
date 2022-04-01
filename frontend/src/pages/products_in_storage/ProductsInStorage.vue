@@ -19,22 +19,22 @@
     </tr>
     </thead>
     <tbody>
-    <tr v-for="productInStorage in productsInStorage" :key="productInStorage.productInWarehouseId">
-      <td>{{ productInStorage.product.name }}</td>
-      <td>{{ productInStorage.product.weight }}</td>
-      <td>{{ productInStorage.product.height }}</td>
-      <td>{{ productInStorage.product.width }}</td>
-      <td>{{ productInStorage.product.length }}</td>
-      <td>{{ productInStorage.warehouse.name }}</td>
-      <td>{{ productInStorage.warehouse.address }}</td>
-      <td>{{ productInStorage.amount }}</td>
+    <tr v-for="productInWarehouse in productsInWarehouse" :key="productInWarehouse.productInWarehouseId">
+      <td>{{ productInWarehouse.product.name }}</td>
+      <td>{{ productInWarehouse.product.weight }}</td>
+      <td>{{ productInWarehouse.product.height }}</td>
+      <td>{{ productInWarehouse.product.width }}</td>
+      <td>{{ productInWarehouse.product.length }}</td>
+      <td>{{ productInWarehouse.warehouse.name }}</td>
+      <td>{{ productInWarehouse.warehouse.address }}</td>
+      <td>{{ productInWarehouse.amount }}</td>
       <td>
         <div class="dropdown dropdown-end">
           <label tabindex="0" class="btn btn-square btn-sm btn-primary m-1 p-2">...</label>
           <ul tabindex="0" class="dropdown-content menu p-2 shadow bg-base-100 rounded w-52">
-            <li><router-link :to="`/product_in_warehouse/${productsInStorage.productInWarehouseId}`">Подробнее</router-link></li>
-            <li><router-link :to="`/product_in_warehouse/${productsInStorage.productInWarehouseId}/edit`">Редактировать</router-link></li>
-            <li><a class="text-error" @click="deleteProductInWarehouse(productsInStorage.productInWarehouseId)">Удалить</a></li>
+            <li><router-link :to="`/product_in_storage/${productInWarehouse.productInWarehouseId}`">Подробнее</router-link></li>
+            <li><router-link :to="`/product_in_storage/${productInWarehouse.productInWarehouseId}/edit`">Редактировать</router-link></li>
+            <li><a class="text-error" @click="deleteProductInWarehouse(productInWarehouse.productInWarehouseId)">Удалить</a></li>
           </ul>
         </div>
       </td>
@@ -50,42 +50,20 @@ export default {
   name: "ProductsInStorage",
   data() {
     return {
-      productsInStorage: [
-        {
-          productInWarehouseId: 0,
-          amount:0,
-          product: {
-            productId: 0,
-            name: "",
-            weight: 0,
-            height: 0,
-            width: 0,
-            length: 0
-          },
-          warehouse: {
-            warehouseId: 0,
-            name: "",
-            address: ""
-          }
-        }
-      ]
+      productsInWarehouse: []
     }
   },
   methods: {
     deleteProductInWarehouse(id) {
       axios.delete(`/ProductInWarehouse/${id}`).then(() => {
-        this.productsInStorage = this.productsInStorage.filter(function (productInStorage) {
-          return productInStorage.productInWarehouseId !== id
+        this.productsInWarehouse = this.productsInWarehouse.filter(function (productInWarehouse) {
+          return productInWarehouse.productInWarehouseId !== id
         })
       })
     }
   },
   created() {
-    axios.get('/ProductInWarehouse').then((response) => this.productsInStorage = response.data)
+    axios.get('/ProductInWarehouse').then((response) => this.productsInWarehouse = response.data)
   }
-<<<<<<< HEAD
-
-=======
->>>>>>> d7b32f4 (categoies assigment)
 }
 </script>

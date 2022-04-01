@@ -36,21 +36,21 @@
       </label>
       <input type="text" class="input input-bordered w-full" readonly v-model="product.length">
     </div>
-    
+    <div class="form-control w-full">
+      <label class="label">
+        <span class="label-text text-neutral-content">Категории</span>
+      </label>
+      <Multiselect
+          v-model="product.categoryIdArray"
+          :close-on-select="false"
+          :options="categories"
+          disabled
+          mode="tags"
+          :classes="multiselectClasses"
+      />
+    </div>
+
     <button class="btn btn-primary mt-4" @click="this.$router.push(`/product/${product.productId}/edit`)">Редактировать</button>
-  </div>
-  <div class="form-control w-full">
-    <label class="label">
-      <span class="label-text text-neutral-content">Категории</span>
-    </label>
-    <Multiselect
-        v-model="product.categoryIdArray"
-        :close-on-select="false"
-        :options="categories"
-        disabled
-        mode="tags"
-        :classes="multiselectClasses"
-    />
   </div>
 </template>
 
