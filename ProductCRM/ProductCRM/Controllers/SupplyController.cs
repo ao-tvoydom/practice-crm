@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Migrations.Context;
 using Migrations.Entities;
+using ProductCRM.Models;
 
 namespace ProductCRM.Controllers
 {
@@ -44,6 +45,49 @@ namespace ProductCRM.Controllers
             return supply;
         }
         
+        [HttpGet("SuppliersStatsInPeriod/{startDate}/{endDate}")]
+        public async Task<ActionResult<IEnumerable<SupplierSupplyAmount>>> GetSupplierStatsInPeriod(DateTime startDate, DateTime endDate)
+        {
+            var supplyStats = await _context.Supplies
+                .GroupBy(s => s.SupplierName)
+                .Select(g => new SupplierSupplyAmount() {SupplierName = g.Key, SupplyAmount = g.Count()})
+                .ToListAsync();
+            
+            if (supplyStats.IsNullOrEmpty())
+            {
+                return NotFound();
+            }
+
+            return supplyStats;
+        }
+        
+        [HttpGet("SuppliesFromSupplierInPeriod/{supplierName}/{startDate}/{endDate}")]
+        public async Task<ActionResult<IEnumerable<Supply>>> GetSuppliesFromSupplierInPeriod(string supplierName,DateTime startDate, DateTime endDate)
+        {
+            var supplies =  await _context.Supplies.Where(s=>s.Date > startDate 
+                                                             && s.Date < endDate 
+                                                             && s.SupplierName == "Supplier").ToListAsync();
+            
+            if (supplies.IsNullOrEmpty())
+            {
+                return NotFound();
+            }
+
+            return supplies;
+        }
+        
+        [HttpGet("SuppliesInPeriod/{startDate}/{endDate}")]
+        public async Task<ActionResult<IEnumerable<Supply>>> GetSuppliesInPeriod(DateTime startDate, DateTime endDate)
+        {
+            var supplies =  await _context.Supplies.Where(s=>s.Date > startDate && s.Date < endDate).ToListAsync();
+            
+            if (supplies.IsNullOrEmpty())
+            {
+                return NotFound();
+            }
+
+            return supplies;
+        }
         
         //[Route("SuppliesByMonth/{monthNumber}")]
         [HttpGet("SuppliesByMonth/{monthNumber}")]
@@ -89,7 +133,10 @@ namespace ProductCRM.Controllers
             return supplies;
         }
 
-        // PUT: api/Supply/5
+        
+        /// <summary>
+        /// ProductInWarehouse - optional
+        /// </summary>
         [HttpPut("{id}")]
         public async Task<IActionResult> PutSupply(int id, Supply supply)
         {
@@ -119,7 +166,9 @@ namespace ProductCRM.Controllers
             return NoContent();
         }
 
-        // POST: api/Supply
+        /// <summary>
+        /// ProductInWarehouse - optional
+        /// </summary>
         [HttpPost]
         public async Task<ActionResult<Supply>> PostSupply(Supply supply)
         {
