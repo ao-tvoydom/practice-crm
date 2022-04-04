@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Text.Json.Serialization;
 
 namespace Migrations.Entities
 {
@@ -10,7 +11,10 @@ namespace Migrations.Entities
         public int ProductWarehouseId { get; set; }
         public int Amount { get; set; }
 
-        public virtual ProductInWarehouse ProductWarehouse { get; set; } = null!;
-        public virtual Shipment Shipment { get; set; } = null!;
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        public virtual ProductInWarehouse? ProductWarehouse { get; set; }
+        
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        public virtual Shipment? Shipment { get; set; }
     }
 }
