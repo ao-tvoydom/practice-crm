@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Text.Json.Serialization;
 
 namespace Migrations.Entities
 {
@@ -11,6 +12,7 @@ namespace Migrations.Entities
         public int Amount { get; set; }
         public DateTime Date { get; set; }
 
-        public virtual ProductInWarehouse ProductInWarehouse { get; set; } = null!;
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        public virtual ProductInWarehouse? ProductInWarehouse { get; set; }
     }
 }
