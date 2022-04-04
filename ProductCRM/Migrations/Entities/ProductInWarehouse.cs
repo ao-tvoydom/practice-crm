@@ -18,9 +18,9 @@ namespace Migrations.Entities
         public int Amount { get; set; }
 
         [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-        public virtual Product? Product { get; set; } = null!;
+        public virtual Product? Product { get; set; }
         [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-        public virtual Warehouse? Warehouse { get; set; } = null!;
+        public virtual Warehouse? Warehouse { get; set; } 
         
         [JsonIgnore]
         public virtual ICollection<ShipmentContent> ShipmentContents { get; set; }
