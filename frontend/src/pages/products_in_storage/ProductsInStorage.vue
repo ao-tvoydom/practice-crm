@@ -1,7 +1,7 @@
 <template>
   <div class="flex items-center mb-2 align-middle">
     <div class="text-3xl mb-2">Товары на складах</div>
-    <button class="btn btn-square btn-primary btn-sm ml-2" @click="this.$router.push(`/product`)">+</button>
+    <button class="btn btn-square btn-primary btn-sm ml-2" @click="this.$router.push(`/product_in_storage`)">+</button>
   </div>
 
   <table class="table table-zebra w-full">

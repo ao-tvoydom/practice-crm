@@ -17,6 +17,7 @@ import ProductsInStorage from "@/pages/products_in_storage/ProductsInStorage";
 import ProductInStorage from "@/pages/products_in_storage/ProductInStorage";
 import EditProductInStorage from "@/pages/products_in_storage/EditProductInStorage";
 import Login from "@/pages/Login";
+import CreateProductInStorage from "@/pages/products_in_storage/CreateProductInStorage";
 
 export default createRouter({
     routes: [
@@ -34,6 +35,7 @@ export default createRouter({
         { path: '/products_in_storage', component:  ProductsInStorage },
         { path: '/product_in_storage/:id', component:  ProductInStorage },
         { path: '/product_in_storage/:id/edit', component:  EditProductInStorage },
+        { path: '/product_in_storage', component:  CreateProductInStorage },
 
         { path: '/storages', component:  Storages },
         { path: '/storage/:id', component:  Storage },

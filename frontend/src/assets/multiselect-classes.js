@@ -4,5 +4,7 @@ export default {
     tags: 'flex-grow flex-shrink flex flex-wrap items-center mt-1',
     dropdown: 'max-h-60 absolute -left-px -right-px bottom-0 transform translate-y-full -mt-px overflow-y-scroll z-50 bg-base-100 flex flex-col rounded-b',
     dropdownHidden: 'hidden',
-    optionPointed: 'bg-primary text-primary-content',
+    optionSelected: 'text-white bg-primary',
+    optionSelectedPointed: 'text-white bg-primary',
+
 }

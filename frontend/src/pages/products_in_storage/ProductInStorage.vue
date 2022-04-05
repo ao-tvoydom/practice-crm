@@ -4,9 +4,54 @@
 
     <div class="form-control w-full">
       <label class="label">
-        <span class="label-text text-neutral-content">Название товара</span>
+        <span class="label-text text-neutral-content">Товар</span>
       </label>
-      <input type="text" class="input input-bordered w-full" readonly v-model="productInWarehouse.product.name">
+      <Multiselect
+          v-model="productInWarehouse.product.productId"
+          :searchable="true"
+          disabled="true"
+          label="name"
+          valueProp="productId"
+          :options="products"
+          :classes="multiselectClasses"
+      >
+        <template v-slot:singlelabel="{ value }">
+          <div class="multiselect-single-label">
+            {{ `${value.name} (id: ${value.productId})` }}
+          </div>
+        </template>
+
+        <template v-slot:option="{ option }">
+          {{ `${option.name} (id: ${option.productId})` }}
+        </template>
+
+      </Multiselect>
+    </div>
+
+    <div class="form-control w-full">
+      <label class="label">
+        <span class="label-text text-neutral-content">Склад</span>
+      </label>
+      <Multiselect
+          v-model="productInWarehouse.warehouse.warehouseId"
+          :searchable="true"
+          label="name"
+          disabled="true"
+          valueProp="warehouseId"
+          :options="warehouses"
+          :classes="multiselectClasses"
+      >
+        <template v-slot:singlelabel="{ value }">
+          <div class="multiselect-single-label">
+            {{ `${value.name} (id: ${value.warehouseId})` }}
+          </div>
+        </template>
+
+        <template v-slot:option="{ option }">
+          {{ `${option.name} (id: ${option.warehouseId})` }}
+        </template>
+
+      </Multiselect>
     </div>
 
     <div class="form-control w-full">
@@ -14,48 +59,6 @@
         <span class="label-text text-neutral-content">Количество</span>
       </label>
       <input type="text" class="input input-bordered w-full" readonly v-model="productInWarehouse.amount">
-    </div>
-
-    <div class="form-control w-full">
-      <label class="label">
-        <span class="label-text text-neutral-content">Вес</span>
-      </label>
-      <input type="text" class="input input-bordered w-full" readonly v-model="productInWarehouse.product.weight">
-    </div>
-
-    <div class="form-control w-full">
-      <label class="label">
-        <span class="label-text text-neutral-content">Высота</span>
-      </label>
-      <input type="text" class="input input-bordered w-full" readonly v-model="productInWarehouse.product.height">
-    </div>
-
-    <div class="form-control w-full">
-      <label class="label">
-        <span class="label-text text-neutral-content">Ширина</span>
-      </label>
-      <input type="text" class="input input-bordered w-full" readonly v-model="productInWarehouse.product.width">
-    </div>
-
-    <div class="form-control w-full">
-      <label class="label">
-        <span class="label-text text-neutral-content">Длинна</span>
-      </label>
-      <input type="text" class="input input-bordered w-full" readonly v-model="productInWarehouse.product.length">
-    </div>
-
-    <div class="form-control w-full">
-      <label class="label">
-        <span class="label-text text-neutral-content">Название склада</span>
-      </label>
-      <input type="text" class="input input-bordered w-full" readonly v-model="productInWarehouse.warehouse.name">
-    </div>
-
-    <div class="form-control w-full">
-      <label class="label">
-        <span class="label-text text-neutral-content">Адрес склада</span>
-      </label>
-      <input type="text" class="input input-bordered w-full" readonly v-model="productInWarehouse.warehouse.address">
     </div>
 
     <button class="btn btn-primary mt-4"
@@ -68,17 +71,28 @@
 
 <script>
 import axios from "@/axios";
+import Multiselect from "@vueform/multiselect";
+import multiselectClasses from "@/assets/multiselect-classes";
+
 
 export default {
   name: "ProductInStorage",
   data() {
     return {
       productInWarehouse: {
-        productInWarehouseId: this.$route.params.id
-      }
+        productInWarehouseId: this.$route.params.id,
+      },
+      products: {},
+      warehouses: {},
+      multiselectClasses
     }
   },
+  components: {
+    Multiselect
+  },
   created() {
+    axios.get('/Product').then((response) => this.products = response.data)
+    axios.get('/Warehouse').then((response) => this.warehouses = response.data)
     axios.get(`/ProductInWarehouse/${this.productInWarehouse.productInWarehouseId}`)
          .then((response) => this.productInWarehouse = response.data)
   }
