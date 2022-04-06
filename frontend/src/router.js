@@ -21,6 +21,7 @@ import CreateProductInStorage from "@/pages/products_in_storage/CreateProductInS
 import EditSupply from "@/pages/supplies/EditSupply";
 import Supply from "@/pages/supplies/Supply";
 import CreateSupply from "@/pages/supplies/CreateSupply";
+import ShipmentContents from "@/pages/ShipmentContents/ShipmentContents";
 
 export default createRouter({
     routes: [
@@ -54,7 +55,9 @@ export default createRouter({
         { path: '/supply/:id', component:  Supply },
         { path: '/supply', component:  CreateSupply },
 
-        { path: '/login', component:  Login }
+        { path: '/login', component:  Login },
+
+        { path: '/shipmentContents', component:  ShipmentContents },
     ],
     history: createWebHashHistory()
 })
