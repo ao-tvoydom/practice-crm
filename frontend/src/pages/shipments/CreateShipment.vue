@@ -4,44 +4,30 @@
 
     <div class="form-control w-full">
       <label class="label">
-        <span class="label-text text-neutral-content">Товар</span>
-      </label>
-      <input type="text" class="input input-bordered w-full " v-model="shipment.product_name">
-    </div>
-
-    <div class="form-control w-full">
-      <label class="label">
-        <span class="label-text text-neutral-content">Количество</span>
-      </label>
-      <input type="text" class="input input-bordered w-full" v-model="shipment.amount">
-    </div>
-
-    <div class="form-control w-full">
-      <label class="label">
         <span class="label-text text-neutral-content">Целевой адрес</span>
       </label>
-      <input type="text" class="input input-bordered w-full" v-model="shipment.target_address">
+      <input type="text" class="input input-bordered w-full" v-model="shipment.targetAddress">
     </div>
 
     <div class="form-control w-full">
       <label class="label">
         <span class="label-text text-neutral-content">Дата начала отгрузки</span>
       </label>
-      <input type="text" class="input input-bordered w-full" v-model="shipment.start_date">
+      <input type="text" class="input input-bordered w-full" v-model="shipment.shipmentStartDate">
     </div>
 
     <div class="form-control w-full">
       <label class="label">
         <span class="label-text text-neutral-content">Дата окончания отгрузки</span>
       </label>
-      <input type="text" class="input input-bordered w-full" v-model="shipment.end_date">
+      <input type="text" class="input input-bordered w-full" v-model="shipment.shipmentEndDate">
     </div>
 
     <div class="form-control w-full">
       <label class="label">
         <span class="label-text text-neutral-content">Контактный телефон</span>
       </label>
-      <input type="text" class="input input-bordered w-full" v-model="shipment.phone">
+      <input type="text" class="input input-bordered w-full" v-model="shipment.contactPhone">
     </div>
     
     <button class="btn btn-primary mt-4" @click="save">Сохранить</button>
@@ -67,7 +53,3 @@ export default {
   }
 }
 </script>
-
-<style scoped>
-
-</style>

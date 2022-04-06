@@ -7,8 +7,6 @@
 
     <thead>
     <tr>
-      <th>Товар</th>
-      <th>Количество</th>
       <th>Целевой адрес</th>
       <th>Дата начала отгрузки</th>
       <th>Дата окончания отгрузки</th>
@@ -18,18 +16,17 @@
     </thead>
     <tbody>
     <tr v-for="shipment in shipments" :key="shipment.name">
-      <td><a class="link link-primary">{{ shipment.product_name }}</a></td>
-      <td>{{ shipment.amount }}</td>
-      <td>{{ shipment.target_address }}</td>
-      <td>{{ shipment.start_date }}</td>
-      <td>{{ shipment.end_date }}</td>
-      <td>{{ shipment.phone }}</td>
+      <td>{{ shipment.targetAddress }}</td>
+      <td>{{ shipment.shipmentStartDate }}</td>
+      <td>{{ shipment.shipmentEndDate }}</td>
+      <td>{{ shipment.contactPhone }}</td>
       <td>
         <div class="dropdown dropdown-end">
-          <label tabindex="0" class="btn btn-primary m-1 p-2 rounded">...</label>
+          <label tabindex="0" class="btn btn-square btn-sm btn-primary m-1 p-2">...</label>
           <ul tabindex="0" class="dropdown-content menu p-2 shadow bg-base-100 rounded w-52">
-            <li><a>Редактировать</a></li>
-            <li><a>Удалить</a></li>
+            <li><router-link :to="`/shipment/${shipment.shipmentId}`">Подробнее</router-link></li>
+            <li><router-link :to="`/shipment/${shipment.shipmentId}/edit`">Редактировать</router-link></li>
+            <li><a class="text-error" @click="deleteShipment(shipment.shipmentId)">Удалить</a></li>
           </ul>
         </div>
       </td>
@@ -39,53 +36,26 @@
 </template>
 
 <script>
+import axios from "@/axios";
+
 export default {
-  name: "ShipmentPage",
+  name: "ShipmentsPage",
   data() {
     return {
-      shipments: [
-        {
-          product_name: "Зубная паста",
-          amount: 1000,
-          target_address: "г. Москва ул. Стахановская д.5 к.1 ",
-          start_date: "07.02.2022",
-          end_date: "10.02.2022",
-          phone: "+7 (495) 434-34-34"
-        },
-        {
-          product_name: "Зубная паста",
-          amount: 1000,
-          target_address: "г. Москва ул. Стахановская д.5 к.1 ",
-          start_date: "07.02.2022",
-          end_date: "10.02.2022",
-          phone: "+7 (495) 434-34-34"
-        },
-        {
-          product_name: "Зубная паста",
-          amount: 1000,
-          target_address: "г. Москва ул. Стахановская д.5 к.1 ",
-          start_date: "07.02.2022",
-          end_date: "10.02.2022",
-          phone: "+7 (495) 434-34-34"
-        },
-        {
-          product_name: "Зубная паста",
-          amount: 1000,
-          target_address: "г. Москва ул. Стахановская д.5 к.1 ",
-          start_date: "07.02.2022",
-          end_date: "10.02.2022",
-          phone: "+7 (495) 434-34-34"
-        },
-        {
-          product_name: "Зубная паста",
-          amount: 1000,
-          target_address: "г. Москва ул. Стахановская д.5 к.1 ",
-          start_date: "07.02.2022",
-          end_date: "10.02.2022",
-          phone: "+7 (495) 434-34-34"
-        }
-      ]
+      shipments: []
     }
+  },
+  methods: {
+    deleteShipment(id) {
+      axios.delete(`/Shipment/${id}`).then(() => {
+        this.shipments = this.shipments.filter(function (shipment) {
+          return shipment.shipmentId !== id
+        })
+      })
+    }
+  },
+  created() {
+    axios.get('/Shipment').then((response) => this.shipments = response.data)
   }
 }
 </script>

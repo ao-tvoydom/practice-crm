@@ -24,11 +24,11 @@ import CreateSupply from "@/pages/supplies/CreateSupply";
 import EditShipment from "@/pages/shipments/EditShipment";
 import Shipment from "@/pages/shipments/Shipment";
 import CreateShipment from "@/pages/shipments/CreateShipment";
+
 import ShipmentContents from "@/pages/shipment_contents/ShipmentContents";
 import ShipmentContent from "@/pages/shipment_contents/ShipmentContent";
 import EditShipmentContent from "@/pages/shipment_contents/EditShipmentContent";
 import CreateShipmentContent from "@/pages/shipment_contents/CreateShipmentContent";
-
 
 export default createRouter({
     routes: [

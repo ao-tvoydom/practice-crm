@@ -35,18 +35,7 @@
                 class="btn btn-square btn-sm btn-primary m-1 p-2"
                 >...</label
               >
-              <ul
-                tabindex="0"
-                class="
-                  dropdown-content
-                  menu
-                  p-2
-                  shadow
-                  bg-base-100
-                  rounded
-                  w-52
-                "
-              >
+              <ul tabindex="0" class="dropdown-content menu p-2 shadow bg-base-100 rounded w-52">
                 <li>
                   <router-link :to="`/product/${product.productId}`"
                     >Подробнее</router-link
