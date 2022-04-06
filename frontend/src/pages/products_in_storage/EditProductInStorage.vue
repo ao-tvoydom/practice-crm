@@ -34,7 +34,6 @@
       <Multiselect
           v-model="productInWarehouse.warehouse.warehouseId"
           :searchable="true"
-          label="name"
           valueProp="warehouseId"
           :options="warehouses"
           :classes="multiselectClasses"

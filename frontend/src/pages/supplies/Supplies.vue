@@ -1,9 +1,14 @@
 <template>
-  <div class="text-3xl mb-2">Поставки</div>
+  <div class="flex items-center mb-2 align-middle">
+    <div class="text-3xl mb-2">Поставки</div>
+    <button class="btn btn-square btn-primary btn-sm ml-2" @click="this.$router.push(`/supply`)">+</button>
+  </div>
+
   <table class="table table-zebra w-full">
     <thead>
       <tr>
-        <th>Товар на складе</th>
+        <th>Товар</th>
+        <th>Склад</th>
         <th>Поставщик</th>
         <th>Количество</th>
         <th>Дата</th>
@@ -12,7 +17,8 @@
     </thead>
     <tbody>
       <tr v-for="supply in supplies" :key="supply.supplyId">
-        <td><router-link class="text-primary" :to="`/product_in_storage/${supply.productInWarehouseId}`">Товар №{{supply.productInWarehouseId}}</router-link></td>
+        <td>{{ supply.productInWarehouse.product.name }}</td>
+        <td>{{ supply.productInWarehouse.warehouse.name }}</td>
         <td>{{ supply.supplierName }}</td>
         <td>{{ supply.amount }}</td>
         <td>{{ supply.date }}</td>
@@ -20,8 +26,8 @@
           <div class="dropdown dropdown-end">
             <label tabindex="0" class="btn btn-primary btn-square btn-sm m-1 p-2 rounded">...</label>
             <ul tabindex="0" class="dropdown-content  menu p-2 shadow bg-base-100 rounded w-52">
-              <li><router-link :to="`/Supply/${supply.supplyId}`">Подробнее</router-link></li>
-              <li><router-link :to="`/Supply/${supply.supplyId}/edit`">Редактировать</router-link></li>
+              <li><router-link :to="`/supply/${supply.supplyId}`">Подробнее</router-link></li>
+              <li><router-link :to="`/supply/${supply.supplyId}/edit`">Редактировать</router-link></li>
               <li><a class="text-error" @click="deleteSupply(supply.supplyId)">Удалить</a></li>
             </ul>
           </div>

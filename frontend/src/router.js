@@ -18,6 +18,9 @@ import ProductInStorage from "@/pages/products_in_storage/ProductInStorage";
 import EditProductInStorage from "@/pages/products_in_storage/EditProductInStorage";
 import Login from "@/pages/Login";
 import CreateProductInStorage from "@/pages/products_in_storage/CreateProductInStorage";
+import EditSupply from "@/pages/supplies/EditSupply";
+import Supply from "@/pages/supplies/Supply";
+import CreateSupply from "@/pages/supplies/CreateSupply";
 
 export default createRouter({
     routes: [
@@ -44,7 +47,12 @@ export default createRouter({
 
         { path: '/shipments', component:  Shipments },
         { path: '/storages', component:  Storages },
+
+
         { path: '/supplies', component:  Supplies },
+        { path: '/supply/:id/edit', component:  EditSupply },
+        { path: '/supply/:id', component:  Supply },
+        { path: '/supply', component:  CreateSupply },
 
         { path: '/login', component:  Login }
     ],
