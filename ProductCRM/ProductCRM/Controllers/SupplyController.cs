@@ -49,6 +49,7 @@ namespace ProductCRM.Controllers
         public async Task<ActionResult<IEnumerable<SupplierSupplyAmount>>> GetSupplierStatsInPeriod(DateTime startDate, DateTime endDate)
         {
             var supplyStats = await _context.Supplies
+                .Where(s=>s.Date > startDate && s.Date < endDate )
                 .GroupBy(s => s.SupplierName)
                 .Select(g => new SupplierSupplyAmount() {SupplierName = g.Key, SupplyAmount = g.Count()})
                 .ToListAsync();

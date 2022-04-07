@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Migrations.Context;
 using Migrations.Entities;
+using ProductCRM.Models;
 
 namespace ProductCRM.Controllers
 {
@@ -74,6 +75,26 @@ namespace ProductCRM.Controllers
             return shipments;
         }
 
+        [HttpGet("ShipmentStatsInPeriod/{startDate}/{endDate}")]
+        public async Task<ActionResult<IEnumerable<ShipmentStat>>> GetShipmentStatsInPeriod(DateTime startDate, DateTime endDate)
+        {
+            var shipments = await _context.Shipments
+                .Where(s => s.ShipmentStartDate > startDate && s.ShipmentStartDate < endDate)
+                .Select(s => s.ShipmentContents.Select(sc => sc.ProductWarehouse))
+                .SelectMany(x=>x)
+                .GroupBy(pw=>pw.Warehouse.Name)
+                .Select(g=> new ShipmentStat() {WarehouseName = g.Key, ShipmentAmount = g.Count()})
+                .ToListAsync();
+
+            if (shipments.IsNullOrEmpty())
+            {
+                return NotFound();
+            }
+
+            return shipments;
+        }
+        
+        
         // GET: api/Shipment/5
         [HttpGet("{id}")]
         public async Task<ActionResult<Shipment>> GetShipment(int id)
