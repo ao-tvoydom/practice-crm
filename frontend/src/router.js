@@ -21,7 +21,14 @@ import CreateProductInStorage from "@/pages/products_in_storage/CreateProductInS
 import EditSupply from "@/pages/supplies/EditSupply";
 import Supply from "@/pages/supplies/Supply";
 import CreateSupply from "@/pages/supplies/CreateSupply";
-import ShipmentContents from "@/pages/ShipmentContents/ShipmentContents";
+import EditShipment from "@/pages/shipments/EditShipment";
+import Shipment from "@/pages/shipments/Shipment";
+import CreateShipment from "@/pages/shipments/CreateShipment";
+import ShipmentContents from "@/pages/shipment_contents/ShipmentContents";
+import ShipmentContent from "@/pages/shipment_contents/ShipmentContent";
+import EditShipmentContent from "@/pages/shipment_contents/EditShipmentContent";
+import CreateShipmentContent from "@/pages/shipment_contents/CreateShipmentContent";
+
 
 export default createRouter({
     routes: [
@@ -47,7 +54,14 @@ export default createRouter({
         { path: '/storage', component:  CreateStorage },
 
         { path: '/shipments', component:  Shipments },
-        { path: '/storages', component:  Storages },
+        { path: '/shipment/:id', component:  Shipment },
+        { path: '/shipment/:id/edit', component:  EditShipment },
+        { path: '/shipment', component:  CreateShipment },
+
+        { path: '/shipment_contents', component:  ShipmentContents },
+        { path: '/shipment_content/:id', component:  ShipmentContent },
+        { path: '/shipment_content/:id/edit', component:  EditShipmentContent },
+        { path: '/shipment_content', component:  CreateShipmentContent },
 
 
         { path: '/supplies', component:  Supplies },
@@ -55,9 +69,7 @@ export default createRouter({
         { path: '/supply/:id', component:  Supply },
         { path: '/supply', component:  CreateSupply },
 
-        { path: '/login', component:  Login },
-
-        { path: '/shipmentContents', component:  ShipmentContents },
+        { path: '/login', component:  Login }
     ],
     history: createWebHashHistory()
 })

@@ -5,34 +5,27 @@
         <span>Product</span>
         <span class="text-primary">CRM</span>
       </div>
-      <router-link class="text-2xl m-2 cursor-pointer hover:text-primary" to="/"
-        >Товары</router-link
-      >
-      <router-link
-        class="text-2xl m-2 cursor-pointer hover:text-primary"
-        to="/products_in_storage"
-        >Товары на складах</router-link
-      >
-      <router-link
-        class="text-2xl m-2 cursor-pointer hover:text-primary"
-        to="/storages"
-        >Склады</router-link
-      >
-      <router-link
-        class="text-2xl m-2 cursor-pointer hover:text-primary"
-        to="/supplies"
-        >Поставки</router-link
-      >
-      <router-link
-        class="text-2xl m-2 cursor-pointer hover:text-primary"
-        to="/shipments"
-        >Отгрузки</router-link
-      >
-      <router-link
-        class="text-2xl m-2 cursor-pointer hover:text-primary"
-        to="/categories"
-        >Категории</router-link
-      >
+      <router-link class="text-2xl m-2 cursor-pointer hover:text-primary" to="/">
+        Товары
+      </router-link>
+      <router-link class="text-2xl m-2 cursor-pointer hover:text-primary" to="/storages">
+        Склады
+      </router-link>
+      <router-link class="text-2xl m-2 cursor-pointer hover:text-primary" to="/products_in_storage">
+        Товары на складах
+      </router-link>
+      <router-link class="text-2xl m-2 cursor-pointer hover:text-primary" to="/supplies">
+        Поставки
+      </router-link>
+      <router-link class="text-2xl m-2 cursor-pointer hover:text-primary" to="/shipments">
+        Отгрузки
+      </router-link>
+      <router-link class="text-2xl m-2 cursor-pointer hover:text-primary" to="/shipment_contents">
+        Отгрузки на скад
+      </router-link>
+      <router-link class="text-2xl m-2 cursor-pointer hover:text-primary" to="/categories">
+        Категории
+      </router-link>
     </header>
 
     <div class="m-2 flex-grow">
