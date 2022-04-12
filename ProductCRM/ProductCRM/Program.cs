@@ -20,12 +20,23 @@ builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationSc
         options.LoginPath = new Microsoft.AspNetCore.Http.PathString("/Account/Login");
     });
 
+builder.Services.AddCors(options =>
+{
+
+    options.AddPolicy(name: "MyAllowSpecificOrigins",
+        policy =>
+        {
+            policy.WithOrigins("localhost:8080");
+        });
+
+});
 
 var app = builder.Build();
 
 
 app.UseAuthentication();
 app.UseAuthorization();
+app.UseCors("MyAllowSpecificOrigins");
 app.UseSwagger();
 app.UseSwaggerUI(c =>
 {
