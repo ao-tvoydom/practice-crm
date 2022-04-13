@@ -8,7 +8,7 @@
       <router-link class="text-2xl m-2 cursor-pointer hover:text-primary" to="/">
         Товары
       </router-link>
-      <router-link class="text-2xl m-2 cursor-pointer hover:text-primary" to="/storages">
+      <router-link class="text-2xl m-2 cursor-pointer hover:text-primary" to="/warehouses">
         Склады
       </router-link>
       <router-link class="text-2xl m-2 cursor-pointer hover:text-primary" to="/products_in_storage">

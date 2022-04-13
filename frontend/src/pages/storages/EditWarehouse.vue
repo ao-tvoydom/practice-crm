@@ -1,23 +1,23 @@
 <template>
   <div class="card bg-neutral p-4 text-neutral-content w-2/5 m-auto ">
-    <div class="text-3xl mb-2">Склад № {{ storage.storageId }}</div>
+    <div class="text-3xl mb-2">Редактировать склад</div>
 
     <div class="form-control w-full">
       <label class="label">
         <span class="label-text text-primary-content">Название склада</span>
       </label>
-      <input type="text" class="input input-bordered w-full  text-neutral" v-model="storage.name">
+      <input type="text" class="input input-bordered w-full  text-neutral" v-model="warehouse.name">
     </div>
 
     <div class="form-control w-full">
       <label class="label">
         <span class="label-text text-primary-content">Адрес склада</span>
       </label>
-      <input type="text" class="input input-bordered w-full text-neutral" v-model="storage.address">
+      <input type="text" class="input input-bordered w-full text-neutral" v-model="warehouse.address">
     </div>
     
     <button class="btn btn-primary mt-4" @click="save">Сохранить</button>
-    <button class="btn btn-primary mt-4" @click="this.$router.push(`/storage/${storage.storageId}`)">Простмотр</button>
+    <button class="btn btn-primary mt-4" @click="this.$router.push(`/warehouse/${warehouse.warehouseId}`)">Простмотр</button>
 
   </div>
 </template>
@@ -29,7 +29,7 @@ export default {
   name: "EditStoragePage",
   data() {
     return {
-      storage: {
+      warehouse: {
         storageId: this.$route.params.id,
         name: "",
         address: "",
@@ -38,13 +38,13 @@ export default {
   },
   methods: {
     save() {
-      axios.put(`/Storage/${this.storage.storageId}`, this.storage).then(() => {
-        this.$router.push(`/storage/${this.storage.storageId}`)
+      axios.put(`/Warehouse/${this.warehouse.warehouseId}`, this.warehouse).then(() => {
+        this.$router.push(`/warehouse/${this.warehouse.warehouseId}`)
       })
     }
   },
   created() {
-    axios.get(`/Storage/${this.storage.storageId}`).then((response) => this.storage = response.data)
+    axios.get(`/Warehouse/${this.warehouse.warehouseId}`).then((response) => this.warehouse = response.data)
   }
 }
 </script>

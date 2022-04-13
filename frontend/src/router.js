@@ -2,13 +2,9 @@ import  { createRouter, createWebHashHistory } from 'vue-router'
 import Products from "@/pages/products/Products";
 import Product from "@/pages/products/Product";
 import Shipments from "@/pages/shipments/Shipments";
-import Storages from "@/pages/storages/Storages";
-import Storage from "@/pages/storages/Storage";
-import EditStorage from "@/pages/storages/EditStorage";
 import Supplies from "@/pages/supplies/Supplies";
 import EditProduct from "@/pages/products/EditProduct";
 import CreateProduct from "@/pages/products/CreateProduct";
-import CreateStorage from "@/pages/storages/CreateStorage";
 import Categories from "@/pages/categories/Categories";
 import Category from "@/pages/categories/Category";
 import EditCategory from "@/pages/categories/EditCategory";
@@ -29,6 +25,10 @@ import ShipmentContents from "@/pages/shipment_contents/ShipmentContents";
 import ShipmentContent from "@/pages/shipment_contents/ShipmentContent";
 import EditShipmentContent from "@/pages/shipment_contents/EditShipmentContent";
 import CreateShipmentContent from "@/pages/shipment_contents/CreateShipmentContent";
+import Warehouses from "@/pages/storages/Warehouses";
+import Warehouse from "@/pages/storages/Warehouse";
+import EditWarehouse from "@/pages/storages/EditWarehouse";
+import CreateWarehouse from "@/pages/storages/CreateWarehouse";
 
 export default createRouter({
     routes: [
@@ -48,10 +48,10 @@ export default createRouter({
         { path: '/product_in_storage/:id/edit', component:  EditProductInStorage },
         { path: '/product_in_storage', component:  CreateProductInStorage },
 
-        { path: '/storages', component:  Storages },
-        { path: '/storage/:id', component:  Storage },
-        { path: '/storage/:id/edit', component:  EditStorage },
-        { path: '/storage', component:  CreateStorage },
+        { path: '/warehouses', component:  Warehouses },
+        { path: '/warehouse/:id', component:  Warehouse },
+        { path: '/warehouse/:id/edit', component:  EditWarehouse },
+        { path: '/warehouse', component:  CreateWarehouse },
 
         { path: '/shipments', component:  Shipments },
         { path: '/shipment/:id', component:  Shipment },
@@ -62,7 +62,6 @@ export default createRouter({
         { path: '/shipment_content/:id', component:  ShipmentContent },
         { path: '/shipment_content/:id/edit', component:  EditShipmentContent },
         { path: '/shipment_content', component:  CreateShipmentContent },
-
 
         { path: '/supplies', component:  Supplies },
         { path: '/supply/:id/edit', component:  EditSupply },
