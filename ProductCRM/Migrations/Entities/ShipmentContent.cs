@@ -8,7 +8,7 @@ namespace Migrations.Entities
     {
         public int ShipmentContentId { get; set; }
         public int ShipmentId { get; set; }
-        public int ProductWarehouseId { get; set; }
+        public int ProductInWarehouseId { get; set; }
         public int Amount { get; set; }
 
         [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]

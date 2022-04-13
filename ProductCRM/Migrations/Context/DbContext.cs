@@ -124,7 +124,7 @@ namespace Migrations.Context
 
                 entity.HasOne(d => d.ProductWarehouse)
                     .WithMany(p => p.ShipmentContents)
-                    .HasForeignKey(d => d.ProductWarehouseId)
+                    .HasForeignKey(d => d.ProductInWarehouseId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_ShipmentContent_ProductInWarehouse");
 
