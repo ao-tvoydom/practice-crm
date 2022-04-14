@@ -8,6 +8,8 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Migrations.Context;
 using Migrations.Entities;
+using ProductCRM.Helpers;
+using ProductCRM.Models;
 
 namespace ProductCRM.Controllers
 {
@@ -41,6 +43,72 @@ namespace ProductCRM.Controllers
             }
 
             return productInWarehouse;
+        }
+        
+        /// <summary>
+        /// Get product sale trend and total sum in 15 days period based on previous 15 days
+        /// </summary>
+        [HttpGet("ProductSaleTrendInWarehouse/{productInWarehouseId}")]
+        public async Task<ActionResult<ProductSaleTrend>> GetProductSaleTrendInWarehouse(int productInWarehouseId)
+        {
+            const int AnalysisPeriod = 15;
+            const int PredictionPeriod = 15;
+
+            var data = await _context.Shipments
+                .Where(s => s.ShipmentStartDate > DateTime.Now.AddDays(-AnalysisPeriod))
+                .Select(s => s.ShipmentContents.Where(sc => sc.ProductInWarehouseId == productInWarehouseId))
+                .SelectMany(x => x)
+                .GroupBy(sc => sc.Shipment.ShipmentStartDate)
+                .Select(g => new {Date = g.Key, SaleSum = g.Sum(s => s.Amount)})
+                .ToListAsync();
+
+            var startDate = data.First().Date;
+
+            var analysisData = new Dictionary<decimal, decimal>();
+
+            for (int i = 0; i < 15; i++)
+            {
+
+                var test1 = data.Select(g => g.Date);
+                if (data.Select(g => g.Date).Contains(startDate.AddDays(i)))
+                {
+                    
+                    analysisData.Add(i,data.Single(g => g.Date == startDate.AddDays(i)).SaleSum);
+                }
+                else
+                {
+                    analysisData.Add(i, 0);
+                }
+
+            }
+
+            var trend = new Trendline(
+                analysisData.Select(a => a.Value).ToArray(),
+                analysisData.Select(a => a.Key).ToArray());
+            
+            
+            var predictionData = new Dictionary<decimal, decimal>();
+            
+            int sum = 0;
+            
+            for (int i = AnalysisPeriod; i < AnalysisPeriod + PredictionPeriod; i++)
+            {
+
+                predictionData.Add(i, trend.GetYValue(i));
+                predictionData[i] = Math.Ceiling(predictionData[i]);
+                sum += (int)predictionData[i];
+
+            }
+
+            var result = new ProductSaleTrend()
+            {
+                TotalToBuy = sum,
+                Trend = predictionData.ToDictionary(
+                    k=> (int)k.Key, 
+                    k=> (int)k.Value )
+            };
+            
+            return result;
         }
 
         // PUT: api/ProductInWarehouse/5

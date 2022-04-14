@@ -1,13 +1,18 @@
 #nullable disable
 using System;
 using System.Collections.Generic;
+using System.Drawing.Drawing2D;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Migrations.Context;
 using Migrations.Entities;
+using ProductCRM.Models;
+using MathNet.Numerics;
+using ProductCRM.Helpers;
 
 namespace ProductCRM.Controllers
 {
@@ -151,5 +156,29 @@ namespace ProductCRM.Controllers
         {
             return _context.Products.Any(e => e.ProductId == id);
         }
+        
+        /*public static double CalculateLinest(double[] y, double[] x)
+        {
+            double linest = 0;
+            if (y.Length == x.Length)
+            {
+                double avgY = y.Average();
+                double avgX = x.Average();
+                double[] dividend = new double[y.Length];
+                double[] divisor = new double[y.Length];
+                for (int i = 0; i < y.Length; i++)
+                {
+                    dividend[i] = (x[i] - avgX) * (y[i] - avgY);
+                    divisor[i] = Math.Pow((x[i] - avgX), 2);
+                }
+                linest = dividend.Sum() / divisor.Sum();
+            }
+            return linest;
+        }
+        
+        private double CalculateYIntercept(double[] x, double[] y, double linest)
+        {
+            return (y.Average() - linest * x.Average());
+        }*/
     }
 }
