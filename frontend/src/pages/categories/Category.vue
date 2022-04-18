@@ -14,8 +14,8 @@
         <span class="label-text text-neutral-content">Цвет</span>
       </label>
 
-      <div class="tooltip tooltip-primary tooltip-primary" :data-tip="category.color">
-        <input type="color" class="input input-bordered w-full p-2" v-model="category.color">
+      <div class="tooltip tooltip-primary tooltip-primary" :data-tip="category.colorHex">
+        <input type="color" class="input input-bordered w-full p-2" v-model="category.colorHex">
       </div>
 
     </div>
@@ -37,7 +37,10 @@ export default {
     }
   },
   created() {
-    axios.get(`/Category/${this.category.categoryId}`).then((response) => this.category = response.data)
+    axios.get(`/Category/${this.category.categoryId}`).then((response) => {
+      this.category = response.data
+      this.category.colorHex = `#${this.category.colorHex}`
+    })
   }
 }
 </script>

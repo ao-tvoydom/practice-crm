@@ -1,4 +1,5 @@
 import  { createRouter, createWebHashHistory } from 'vue-router'
+
 import Products from "@/pages/products/Products";
 import Product from "@/pages/products/Product";
 import Shipments from "@/pages/shipments/Shipments";
@@ -20,7 +21,6 @@ import CreateSupply from "@/pages/supplies/CreateSupply";
 import EditShipment from "@/pages/shipments/EditShipment";
 import Shipment from "@/pages/shipments/Shipment";
 import CreateShipment from "@/pages/shipments/CreateShipment";
-
 import ShipmentContents from "@/pages/shipment_contents/ShipmentContents";
 import ShipmentContent from "@/pages/shipment_contents/ShipmentContent";
 import EditShipmentContent from "@/pages/shipment_contents/EditShipmentContent";

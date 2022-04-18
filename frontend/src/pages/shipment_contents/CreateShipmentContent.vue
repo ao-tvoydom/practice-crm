@@ -1,6 +1,6 @@
 <template>
   <div class="card bg-neutral p-4 w-2/5 m-auto ">
-    <div class="text-3xl mb-2 text-neutral-content">Дабавление отгрузки на склад</div>
+    <div class="text-3xl mb-2 text-neutral-content">Добавление отгрузки на склад</div>
 
     <div class="form-control w-full">
       <label class="label">
@@ -84,12 +84,13 @@ export default {
   },
   methods: {
     save() {
-      axios.put(`/ShipmentContent`, {
+      axios.post(`/ShipmentContent`, {
         productInWarehouseId: this.shipmentContent.productInWarehouse.productInWarehouseId,
         shipmentId: this.shipmentContent.shipment.shipmentId,
         amount: this.shipmentContent.amount,
-      }).then(() => {
-        this.$router.push(`/shipment_content/${this.shipmentContent.shipmentContentId}`)
+      }).then((response) => {
+        this.$router.push(`/shipment_content/${response.data.shipmentContentId}`)
+
       })
     }
   },

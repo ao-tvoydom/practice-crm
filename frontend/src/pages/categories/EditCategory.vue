@@ -14,8 +14,8 @@
         <span class="label-text text-neutral-content">Цвет</span>
       </label>
 
-      <div class="tooltip tooltip-primary tooltip-primary" :data-tip="category.color">
-        <input type="color" class="input input-bordered w-full p-2" v-model="category.color">
+      <div class="tooltip tooltip-primary tooltip-primary" :data-tip="category.colorHex">
+        <input type="color" class="input input-bordered w-full p-2" v-model="category.colorHex">
       </div>
 
     </div>
@@ -39,13 +39,20 @@ export default {
   },
   methods: {
     save() {
-      axios.put(`/Category/${this.category.categoryId}`, this.category).then(() => {
+      axios.put(`/Category/${this.category.categoryId}`, {
+        categoryId: this.category.categoryId,
+        name: this.category.name,
+        colorHex: this.category.colorHex.substring(1)
+      }).then(() => {
         this.$router.push(`/category/${this.category.categoryId}`)
       })
     }
   },
   created() {
-    axios.get(`/Category/${this.category.categoryId}`).then((response) => this.category = response.data)
+    axios.get(`/Category/${this.category.categoryId}`).then((response) => {
+      this.category = response.data
+      this.category.colorHex = `#${this.category.colorHex}`
+    })
   }
 }
 </script>

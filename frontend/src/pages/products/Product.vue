@@ -41,7 +41,7 @@
         <span class="label-text text-neutral-content">Категории</span>
       </label>
       <Multiselect
-          v-model="product.categoryIdArray"
+          v-model="product.productCategories.categoryId"
           :close-on-select="false"
           :options="categories"
           disabled
@@ -70,7 +70,7 @@ export default {
         height: "",
         width: "",
         length: "",
-        categoryIdArray: []
+        productCategories: [],
       },
       categories: [],
       multiselectClasses

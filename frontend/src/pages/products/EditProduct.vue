@@ -74,7 +74,14 @@ export default {
   },
   methods: {
     save() {
-      axios.put(`/Product/${this.product.productId}`, this.product).then(() => {
+      axios.put(`/Product/${this.product.productId}`, {
+        productId: this.product.productId,
+        name: this.product.name,
+        width: this.product.width,
+        height: this.product.height,
+        length: this.product.length,
+        weight: this.product.weight
+      }).then(() => {
         this.$router.push(`/product/${this.product.productId}`)
       })
     }

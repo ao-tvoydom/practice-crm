@@ -30,7 +30,7 @@ export default {
   data() {
     return {
       warehouse: {
-        storageId: this.$route.params.id,
+        warehouseId: this.$route.params.id,
         name: "",
         address: "",
       }

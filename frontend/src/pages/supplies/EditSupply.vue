@@ -73,6 +73,7 @@ export default {
   methods: {
     save() {
       axios.put(`/Supply/${this.supply.supplyId}`, {
+        supplyId: this.supply.supplyId,
         productInWarehouseId: this.supply.productInWarehouse.productInWarehouseId,
         supplierName: this.supply.supplierName,
         amount: this.supply.amount,
