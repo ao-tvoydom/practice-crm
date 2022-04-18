@@ -12,7 +12,7 @@ using Microsoft.AspNetCore.Authentication.Cookies;
 
 namespace ProductCRM.Controllers;
 
-[Route("/[controller]")]
+[Route("api/[controller]")]
 [ApiController]
 public class AccountController : Controller
 {
