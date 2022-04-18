@@ -28,7 +28,6 @@ public class AccountController : Controller
     /// Requires antiforgery token
     /// </summary>
     [HttpPost("Login")]
-    [ValidateAntiForgeryToken]
     public async Task<IActionResult> Login(LoginModel model)
     {
         object result = new {Error = "Invalid Model State"};
@@ -59,7 +58,6 @@ public class AccountController : Controller
     /// Requires antiforgery token
     /// </summary>
     [HttpPost("Register")]
-    [ValidateAntiForgeryToken]
     public async Task<IActionResult> Register(RegisterModel model)
     {
         object result = new {Error = "Invalid Model State"};
