@@ -1,0 +1,14 @@
+C:\Users\Denis\practice-crm\ProductCRM\Migrations\bin\Debug\net6.0\Migrations.deps.json
+C:\Users\Denis\practice-crm\ProductCRM\Migrations\bin\Debug\net6.0\Migrations.runtimeconfig.json
+C:\Users\Denis\practice-crm\ProductCRM\Migrations\bin\Debug\net6.0\Migrations.dll
+C:\Users\Denis\practice-crm\ProductCRM\Migrations\bin\Debug\net6.0\Migrations.pdb
+C:\Users\Denis\practice-crm\ProductCRM\Migrations\obj\Debug\net6.0\Migrations.csproj.AssemblyReference.cache
+C:\Users\Denis\practice-crm\ProductCRM\Migrations\obj\Debug\net6.0\Migrations.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Denis\practice-crm\ProductCRM\Migrations\obj\Debug\net6.0\Migrations.AssemblyInfoInputs.cache
+C:\Users\Denis\practice-crm\ProductCRM\Migrations\obj\Debug\net6.0\Migrations.AssemblyInfo.cs
+C:\Users\Denis\practice-crm\ProductCRM\Migrations\obj\Debug\net6.0\Migrations.csproj.CoreCompileInputs.cache
+C:\Users\Denis\practice-crm\ProductCRM\Migrations\obj\Debug\net6.0\Migrations.dll
+C:\Users\Denis\practice-crm\ProductCRM\Migrations\obj\Debug\net6.0\refint\Migrations.dll
+C:\Users\Denis\practice-crm\ProductCRM\Migrations\obj\Debug\net6.0\Migrations.pdb
+C:\Users\Denis\practice-crm\ProductCRM\Migrations\obj\Debug\net6.0\Migrations.genruntimeconfig.cache
+C:\Users\Denis\practice-crm\ProductCRM\Migrations\obj\Debug\net6.0\ref\Migrations.dll

@@ -17,27 +17,41 @@ builder.Services.AddSwaggerGen(c =>
 builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
     .AddCookie(options =>
     {
-        options.LoginPath = new Microsoft.AspNetCore.Http.PathString("/Account/Login");
+        options.Events = new CookieAuthenticationEvents
+        {                          
+            OnRedirectToLogin = redirectContext =>
+            {
+                redirectContext.HttpContext.Response.StatusCode = 401;
+                return Task.CompletedTask;
+            }
+        };
     });
+
+builder.Services.AddAntiforgery(options =>
+{
+    // Set Cookie properties using CookieBuilder properties†.
+    options.FormFieldName = "AntiforgeryFieldname";
+    options.HeaderName = "X-CSRF-TOKEN-HEADERNAME";
+    options.SuppressXFrameOptionsHeader = false;
+});
+
 
 builder.Services.AddCors(options =>
 {
-
-    options.AddPolicy(name: "MyAllowSpecificOrigins",
+    options.AddDefaultPolicy(
         policy =>
         {
-            policy.WithOrigins("localhost:8080");
+            policy.WithOrigins("http://localhost:8080").AllowAnyHeader().AllowAnyMethod().AllowCredentials();
         });
-
 });
 
 var app = builder.Build();
 
-
 app.UseAuthentication();
 app.UseAuthorization();
-app.UseCors("MyAllowSpecificOrigins");
+app.UseCors();
 app.UseSwagger();
+
 app.UseSwaggerUI(c =>
 {
     c.SwaggerEndpoint("v1.2/swagger.json", "Api V1.2");
@@ -48,6 +62,5 @@ app.MapControllerRoute(name: "DefaultApi",
 
 app.MapControllers();
 app.MapGet("/", () => "Hello World!");
-
 
 app.Run();

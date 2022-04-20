@@ -23,7 +23,6 @@ public class AccountController : Controller
         _context = context;
     }
     
-
     /// <summary>
     /// Requires antiforgery token
     /// </summary>
@@ -38,7 +37,6 @@ public class AccountController : Controller
             if (user is not null)
             {
                 await Authenticate(model.Login);
-
                 result = new {Success = true};
             }
             else

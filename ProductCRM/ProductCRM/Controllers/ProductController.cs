@@ -12,10 +12,12 @@ using Migrations.Context;
 using Migrations.Entities;
 using ProductCRM.Models;
 using MathNet.Numerics;
+using Microsoft.AspNetCore.Authorization;
 using ProductCRM.Helpers;
 
 namespace ProductCRM.Controllers
 {
+    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class ProductController : ControllerBase

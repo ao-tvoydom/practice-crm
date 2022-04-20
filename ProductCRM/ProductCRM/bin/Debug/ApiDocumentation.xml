@@ -1,0 +1,45 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>ProductCRM</name>
+    </assembly>
+    <members>
+        <member name="M:ProductCRM.Controllers.AccountController.Login(ProductCRM.Models.LoginModel)">
+            <summary>
+            Requires antiforgery token
+            </summary>
+        </member>
+        <member name="M:ProductCRM.Controllers.AccountController.Register(ProductCRM.Models.RegisterModel)">
+            <summary>
+            Requires antiforgery token
+            </summary>
+        </member>
+        <member name="M:ProductCRM.Controllers.ProductController.PutProduct(System.Int32,Migrations.Entities.Product)">
+            <summary>
+            Update a specific product by unique id |
+            categoryIdArray - Optional
+            </summary>
+        </member>
+        <member name="M:ProductCRM.Controllers.ProductController.PostProduct(Migrations.Entities.Product)">
+            <summary>
+            Add new product |
+            categoryIdArray - Optional
+            </summary>
+        </member>
+        <member name="M:ProductCRM.Controllers.ProductInWarehouseController.GetProductSaleTrendInWarehouse(System.Int32)">
+            <summary>
+            Get product sale trend and total sum in 15 days period based on previous 15 days
+            </summary>
+        </member>
+        <member name="M:ProductCRM.Controllers.SupplyController.PutSupply(System.Int32,Migrations.Entities.Supply)">
+            <summary>
+            ProductInWarehouse - optional
+            </summary>
+        </member>
+        <member name="M:ProductCRM.Controllers.SupplyController.PostSupply(Migrations.Entities.Supply)">
+            <summary>
+            ProductInWarehouse - optional
+            </summary>
+        </member>
+    </members>
+</doc>

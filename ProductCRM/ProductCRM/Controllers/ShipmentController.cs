@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Castle.Core.Internal;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -13,6 +14,7 @@ using ProductCRM.Models;
 
 namespace ProductCRM.Controllers
 {
+    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class ShipmentController : ControllerBase
@@ -80,7 +82,7 @@ namespace ProductCRM.Controllers
         {
             var shipments = await _context.Shipments
                 .Where(s => s.ShipmentStartDate > startDate && s.ShipmentStartDate < endDate)
-                .Select(s => s.ShipmentContents.Select(sc => sc.ProductWarehouse))
+                .Select(s => s.ShipmentContents.Select(sc => sc.ProductInWarehouse))
                 .SelectMany(x=>x)
                 .GroupBy(pw=>pw.Warehouse.Name)
                 .Select(g=> new ShipmentStat() {WarehouseName = g.Key, ShipmentAmount = g.Count()})

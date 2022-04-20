@@ -12,7 +12,7 @@ namespace Migrations.Entities
         public int Amount { get; set; }
 
         [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-        public virtual ProductInWarehouse? ProductWarehouse { get; set; }
+        public virtual ProductInWarehouse? ProductInWarehouse { get; set; }
         
         [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public virtual Shipment? Shipment { get; set; }
