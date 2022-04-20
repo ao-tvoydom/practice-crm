@@ -81,7 +81,7 @@ export default {
       });
     },
   },
-  created() {
+  async created() {
     axios.get("/Product").then((response) => (this.products = response.data));
   },
 };

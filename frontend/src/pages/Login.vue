@@ -4,9 +4,9 @@
 
     <div class="form-control w-full">
       <label class="label">
-        <span class="label-text text-neutral-content">Email</span>
+        <span class="label-text text-neutral-content">Логин</span>
       </label>
-      <input type="text" class="input input-bordered w-full " v-model="user.email">
+      <input type="text" class="input input-bordered w-full " v-model="user.login">
     </div>
 
     <div class="form-control w-full">
@@ -21,19 +21,23 @@
 </template>
 
 <script>
+import axios from "@/axios";
+
 export default {
   name: "LoginPage",
   data() {
     return {
       user: {
-        email: "",
+        login: "",
         password: ""
       }
     }
   },
   methods: {
     login() {
-      //Жду API
+      axios.post(`/Account/Login`, this.user).then(() => {
+        this.$router.push('/')
+      })
     }
   }
 }
