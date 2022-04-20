@@ -14,19 +14,6 @@ builder.Services.AddSwaggerGen(c =>
     c.IncludeXmlComments(filePath);
 });
 
-builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
-    .AddCookie(options =>
-    {
-        options.Events = new CookieAuthenticationEvents
-        {                          
-            OnRedirectToLogin = redirectContext =>
-            {
-                redirectContext.HttpContext.Response.StatusCode = 401;
-                return Task.CompletedTask;
-            }
-        };
-    });
-
 builder.Services.AddAntiforgery(options =>
 {
     // Set Cookie properties using CookieBuilder properties†.
@@ -45,11 +32,24 @@ builder.Services.AddCors(options =>
         });
 });
 
+builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+    .AddCookie(options =>
+    {
+        options.Events = new CookieAuthenticationEvents
+        {                          
+            OnRedirectToLogin = redirectContext =>
+            {
+                redirectContext.HttpContext.Response.StatusCode = 401;
+                return Task.CompletedTask;
+            }
+        };
+    });
+
 var app = builder.Build();
 
+app.UseCors();
 app.UseAuthentication();
 app.UseAuthorization();
-app.UseCors();
 app.UseSwagger();
 
 app.UseSwaggerUI(c =>
