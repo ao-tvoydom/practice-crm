@@ -17,6 +17,8 @@
     </div>
 
     <button class="btn btn-primary mt-4" @click="login">Войти</button>
+    <router-link class="text-xl m-2 text-neutral-content cursor-pointer hover:text-secondary" to="/register">Регистрация</router-link>
+
   </div>
 </template>
 

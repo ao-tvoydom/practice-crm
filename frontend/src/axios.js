@@ -6,14 +6,12 @@ const instance = axios.create({
     withCredentials: true
 });
 
-instance.interceptors.response.use(function (response) {
-    return response
-}, function (error) {
-    router.push('/Login')
-    console.log(error.response.data)
-    if (error.response.status === 401) {
-        router.push('/Login')
-    }
+instance.interceptors.response.use(
+    response => response,
+    function (error) {
+        if (error.response.status === 401) {
+            router.push('/login');
+        }
     return Promise.reject(error)
 })
 

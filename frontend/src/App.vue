@@ -64,7 +64,7 @@ export default {
   },
   methods: {
     logout() {
-      axios.post(`/Account/Logout`)
+      axios.post(`/Account/Logout`).then(() => { this.$router.push('/login') })
     }
   }
 

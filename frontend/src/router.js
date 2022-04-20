@@ -29,6 +29,7 @@ import Warehouses from "@/pages/storages/Warehouses";
 import Warehouse from "@/pages/storages/Warehouse";
 import EditWarehouse from "@/pages/storages/EditWarehouse";
 import CreateWarehouse from "@/pages/storages/CreateWarehouse";
+import Register from "@/pages/Register";
 
 export default createRouter({
     routes: [
@@ -68,7 +69,8 @@ export default createRouter({
         { path: '/supply/:id', component:  Supply },
         { path: '/supply', component:  CreateSupply },
 
-        { path: '/login', component:  Login }
+        { path: '/login', component:  Login },
+        { path: '/register', component:  Register }
     ],
     history: createWebHashHistory()
 })
