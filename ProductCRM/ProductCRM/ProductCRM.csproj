@@ -6,4 +6,38 @@
         <ImplicitUsings>enable</ImplicitUsings>
     </PropertyGroup>
 
+    <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
+      <DocumentationFile>bin\Debug\ApiDocumentation.xml</DocumentationFile>
+    </PropertyGroup>
+
+    <ItemGroup>
+      <PackageReference Include="MathNet.Numerics" Version="5.0.0" />
+      <PackageReference Include="Microsoft.EntityFrameworkCore" Version="7.0.0-preview.2.22153.1" />
+      <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="6.0.3">
+        <PrivateAssets>all</PrivateAssets>
+        <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+      </PackageReference>
+      <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="6.0.3" />
+      <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="7.0.0-preview.2.22153.1" />
+      <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="6.0.3">
+        <PrivateAssets>all</PrivateAssets>
+        <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+      </PackageReference>
+      <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="6.0.2" />
+      <PackageReference Include="Swashbuckle.AspNetCore" Version="6.3.0" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Folder Include="Pages" />
+      <Folder Include="Views" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\Migrations\Migrations.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <None Remove="ApiDocumentation.html" />
+    </ItemGroup>
+
 </Project>
