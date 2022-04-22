@@ -2,26 +2,21 @@
   <div class="card bg-neutral p-4 w-2/5 m-auto ">
     <div class="text-3xl mb-2 text-neutral-content">Отгрузка № {{ shipment.shipmentId }}</div>
 
-    <div class="form-control w-full">
-      <label class="label">
-        <span class="label-text text-neutral-content">Целевой адрес</span>
-      </label>
-      <input type="text" class="input input-bordered w-full" readonly v-model="shipment.targetAddress">
-    </div>
-
-    <div class="form-control w-full">
-      <label class="label">
-        <span class="label-text text-neutral-content">Дата начала отгрузки</span>
-      </label>
-      <input type="text" class="input input-bordered w-full" readonly v-model="shipment.shipmentStartDate">
-    </div>
-
-    <div class="form-control w-full">
-      <label class="label">
-        <span class="label-text text-neutral-content">Дата окончания отгрузки</span>
-      </label>
-      <input type="text" class="input input-bordered w-full" readonly v-model="shipment.shipmentEndDate">
-    </div>
+    <TextField
+        name="Целевой Адрес"
+        v-model="shipment.targetAddress"
+        readonly="true">
+    </TextField>
+    <DatePicker
+        name="Дата начала отгрузки"
+        v-model="shipment.shipmentStartDate"
+        disabled="true">
+    </DatePicker>
+    <DatePicker
+        name="Дата окончания отгрузки"
+        v-model="shipment.shipmentEndDate"
+        disabled="true">
+    </DatePicker>
 
     <div class="form-control w-full">
       <label class="label">
@@ -36,6 +31,8 @@
 
 <script>
 import axios from "@/axios";
+import DatePicker from "@/controls/DatePicker";
+import TextField from "@/controls/TextField";
 
 export default {
   name: "ShipmentPage",
@@ -48,10 +45,12 @@ export default {
   },
   created() {
     axios.get(`/Shipment/${this.shipment.shipmentId}`).then((response) => this.shipment = response.data)
+  },
+  components: {
+    DatePicker,
+    TextField
   }
+
 }
 </script>
 
-<style scoped>
-
-</style>

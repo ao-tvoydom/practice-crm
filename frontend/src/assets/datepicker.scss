@@ -1,0 +1,22 @@
+$default-color: #555;
+$primary-color: #570df8;
+
+@import '~vue-datepicker-next/scss/index.scss';
+
+.mx-datepicker {
+  padding: 0;
+  width: 100%
+}
+
+.mx-input, .mx-input-wrapper {
+  height: 100%;
+  border-radius: 0.5rem;
+}
+
+td.cell{
+  border-radius: 0.5rem;
+}
+
+.mx-datepicker-main{
+  border-radius: 0.5rem
+}

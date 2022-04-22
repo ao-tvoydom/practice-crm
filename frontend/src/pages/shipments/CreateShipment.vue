@@ -3,20 +3,8 @@
     <div class="text-3xl mb-2 text-neutral-content">Добавить отгрузку {{ shipment.shipmentId }}</div>
 
     <TextField name="Целевой Адрес" :vfield="v$.shipment.targetAddress" v-model="shipment.targetAddress"></TextField>
-
-    <div class="form-control w-full">
-      <label class="label">
-        <span class="label-text text-neutral-content">Дата начала отгрузки</span>
-      </label>
-      <DatePicker class="input input-bordered w-full"  v-model="shipment.shipmentStartDate"></DatePicker>
-    </div>
-
-    <div class="form-control w-full">
-      <label class="label">
-        <span class="label-text text-neutral-content">Дата окончания отгрузки</span>
-      </label>
-      <input type="text" class="input input-bordered w-full" v-model="shipment.shipmentEndDate">
-    </div>
+    <DatePicker name="Дата начала отгрузки" :vfield="v$.shipment.shipmentStartDate" v-model="shipment.shipmentStartDate"></DatePicker>
+    <DatePicker name="Дата окончания отгрузки" :vfield="v$.shipment.shipmentEndDate" v-model="shipment.shipmentEndDate"></DatePicker>
 
     <div class="form-control w-full">
       <label class="label">
@@ -34,8 +22,8 @@ import axios from "@/axios";
 import useVuelidate from "@vuelidate/core";
 import validators from "@/validators";
 import TextField from "@/controls/TextField";
-import DatePicker from '@vuepic/vue-datepicker';
-import '@vuepic/vue-datepicker/dist/main.css'
+import DatePicker from "@/controls/DatePicker";
+
 
 export default {
   name: "CreateShipmentPage",
@@ -57,7 +45,13 @@ export default {
       shipment: {
         targetAddress: {
           checkLength: validators.checkLength(5, 120),
-        }
+        },
+        shipmentStartDate: {
+          checkFullness: validators.checkFullness()
+        },
+        shipmentEndDate: {
+          checkFullness: validators.checkFullness()
+        },
       }
     }
   },
