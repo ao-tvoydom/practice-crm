@@ -2,18 +2,13 @@
   <div class="card bg-neutral p-4 w-2/5 m-auto ">
     <div class="text-3xl mb-2 text-neutral-content">Добавить отгрузку {{ shipment.shipmentId }}</div>
 
-    <div class="form-control w-full">
-      <label class="label">
-        <span class="label-text text-neutral-content">Целевой адрес</span>
-      </label>
-      <input type="text" class="input input-bordered w-full" v-model="shipment.targetAddress">
-    </div>
+    <TextField name="Целевой Адрес" :vfield="v$.shipment.targetAddress" v-model="shipment.targetAddress"></TextField>
 
     <div class="form-control w-full">
       <label class="label">
         <span class="label-text text-neutral-content">Дата начала отгрузки</span>
       </label>
-      <input type="text" class="input input-bordered w-full" v-model="shipment.shipmentStartDate">
+      <DatePicker class="input input-bordered w-full"  v-model="shipment.shipmentStartDate"></DatePicker>
     </div>
 
     <div class="form-control w-full">
@@ -36,20 +31,49 @@
 
 <script>
 import axios from "@/axios";
+import useVuelidate from "@vuelidate/core";
+import validators from "@/validators";
+import TextField from "@/controls/TextField";
+import DatePicker from '@vuepic/vue-datepicker';
+import '@vuepic/vue-datepicker/dist/main.css'
 
 export default {
   name: "CreateShipmentPage",
+  setup () {
+    return { v$: useVuelidate() }
+  },
   data() {
     return {
-      shipment: {}
+      shipment: {
+        targetAddress: '',
+        shipmentStartDate: '',
+        shipmentEndDate: '',
+        contactPhone: ''
+      }
+    }
+  },
+  validations () {
+    return {
+      shipment: {
+        targetAddress: {
+          checkLength: validators.checkLength(5, 120),
+        }
+      }
     }
   },
   methods: {
-    save() {
+    async save() {
+      const isFormCorrect = await this.v$.$validate();
+      if(!isFormCorrect) return;
+
       axios.post(`/Shipment`, this.shipment).then((response) => {
         this.$router.push(`/shipment/${response.data.shipmentId}`)
       })
     }
+  },
+  components: {
+    TextField,
+    DatePicker
   }
 }
 </script>

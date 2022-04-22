@@ -1,41 +1,12 @@
 <template>
   <div class="card bg-neutral p-4 w-2/5 m-auto ">
-    <div class="text-3xl mb-2 text-neutral-content">Товар № {{ product.productId }}</div>
+    <div class="text-3xl mb-2 text-neutral-content">Редактировать товар</div>
 
-    <div class="form-control w-full">
-      <label class="label">
-        <span class="label-text text-neutral-content">Название</span>
-      </label>
-      <input type="text" class="input input-bordered w-full" v-model="product.name">
-    </div>
-
-    <div class="form-control w-full">
-      <label class="label">
-        <span class="label-text text-neutral-content">Вес</span>
-      </label>
-      <input type="text" class="input input-bordered w-full" v-model="product.weight">
-    </div>
-
-    <div class="form-control w-full">
-      <label class="label">
-        <span class="label-text text-neutral-content">Высота</span>
-      </label>
-      <input type="text" class="input input-bordered w-full" v-model="product.height">
-    </div>
-
-    <div class="form-control w-full">
-      <label class="label">
-        <span class="label-text text-neutral-content">Ширина</span>
-      </label>
-      <input type="text" class="input input-bordered w-full" v-model="product.width">
-    </div>
-
-    <div class="form-control w-full">
-      <label class="label">
-        <span class="label-text text-neutral-content">Длинна</span>
-      </label>
-      <input type="text" class="input input-bordered w-full" v-model="product.length">
-    </div>
+    <TextField name="Название" :vfield="v$.product.name" v-model="product.name"></TextField>
+    <TextField name="Вес" :vfield="v$.product.weight" v-model="product.weight"></TextField>
+    <TextField name="Высота" :vfield="v$.product.height" v-model="product.height"></TextField>
+    <TextField name="Ширина" :vfield="v$.product.width" v-model="product.width"></TextField>
+    <TextField name="Длинна" :vfield="v$.product.length" v-model="product.length"></TextField>
 
     <div class="form-control w-full">
       <label class="label">
@@ -59,12 +30,23 @@
 import axios from "@/axios";
 import Multiselect from "@vueform/multiselect";
 import multiselectClasses from "@/assets/multiselect-classes";
+import useVuelidate from "@vuelidate/core";
+import validators from "@/validators";
+import TextField from "@/controls/TextField";
 
 export default {
+  setup () {
+    return { v$: useVuelidate() }
+  },
   name: "EditProductPage",
   data() {
     return {
       product: {
+        name: '',
+        weight: '',
+        height: '',
+        length: '',
+        width: '',
         productId: this.$route.params.id,
         categoryIdArray: []
       },
@@ -73,7 +55,10 @@ export default {
     }
   },
   methods: {
-    save() {
+    async save() {
+      const isFormCorrect = await this.v$.$validate();
+      if(!isFormCorrect) return;
+
       axios.put(`/Product/${this.product.productId}`, {
         productId: this.product.productId,
         name: this.product.name,
@@ -86,7 +71,33 @@ export default {
       })
     }
   },
+  validations () {
+    return {
+      product: {
+        name: {
+          checkLength: validators.checkLength(3, 75)
+        },
+        weight: {
+          checkNumber: validators.checkNumber(),
+          checkLength: validators.checkLength(1, 3)
+        },
+        height: {
+          checkNumber: validators.checkNumber(),
+          checkLength: validators.checkLength(1, 3)
+        },
+        width: {
+          checkNumber: validators.checkNumber(),
+          checkLength: validators.checkLength(1, 3)
+        },
+        length: {
+          checkNumber: validators.checkNumber(),
+          checkLength: validators.checkLength(1, 3)
+        },
+      }
+    }
+  },
   components: {
+    TextField,
     Multiselect
   },
   created() {

@@ -1,6 +1,6 @@
 <template>
   <div class="card bg-neutral p-4 w-2/5 m-auto ">
-    <div class="text-3xl mb-2 text-neutral-content">Товар № {{ product.productId }}</div>
+    <div class="text-3xl mb-2 text-neutral-content">Товар</div>
 
     <div class="form-control w-full">
       <label class="label">

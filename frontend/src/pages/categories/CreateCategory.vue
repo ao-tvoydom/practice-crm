@@ -1,13 +1,8 @@
 <template>
   <div class="card bg-neutral p-4 w-2/5 m-auto ">
-    <div class="text-3xl mb-2 text-neutral-content">Добавить категорию {{ category.categoryId }}</div>
+    <div class="text-3xl mb-2 text-neutral-content">Добавить категорию</div>
 
-    <div class="form-control w-full">
-      <label class="label">
-        <span class="label-text text-neutral-content">Название</span>
-      </label>
-      <input type="text" class="input input-bordered w-full " v-model="category.name">
-    </div>
+    <TextField name="Название" :vfield="v$.category.name" v-model="category.name"></TextField>
 
     <div class="form-control w-full">
       <label class="label">
@@ -26,9 +21,16 @@
 
 <script>
 import axios from "@/axios";
+import useVuelidate from "@vuelidate/core";
+import validators from "@/validators";
+import TextField from "@/controls/TextField";
 
 export default {
   name: "CreateCategoryPage",
+  components: {TextField},
+  setup () {
+    return { v$: useVuelidate() }
+  },
   data() {
     return {
       category: {
@@ -37,8 +39,18 @@ export default {
       }
     }
   },
+  validations () {
+    return {
+      category: {
+        name: { checkLength: validators.checkLength(3, 40) }
+      }
+    }
+  },
   methods: {
-    save() {
+    async save() {
+      const isFormCorrect = await this.v$.$validate();
+      if(!isFormCorrect) return;
+
       axios.post(`/Category`, this.category).then((response) => {
         this.$router.push(`/category/${response.data.categoryId}`)
       })

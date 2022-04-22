@@ -84,6 +84,10 @@ export default {
       multiselectClasses
     }
   },
+  created() {
+    axios.get('/Product').then((response) => this.products = response.data)
+    axios.get('/Warehouse').then((response) => this.warehouses = response.data)
+  },
   methods: {
     save() {
       axios.post(`/ProductInWarehouse`, {
@@ -94,10 +98,6 @@ export default {
         this.$router.push(`/product_in_storage/${response.data.productInWarehouseId}`)
       })
     }
-  },
-  created() {
-    axios.get('/Product').then((response) => this.products = response.data)
-    axios.get('/Warehouse').then((response) => this.warehouses = response.data)
   },
   components: {
     Multiselect

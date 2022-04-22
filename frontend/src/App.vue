@@ -28,7 +28,6 @@
           Категории
         </router-link>
       </div>
-
       <button class="btn btn-primary" @click="logout">Выйти</button>
     </header>
 
@@ -67,7 +66,6 @@ export default {
       axios.post(`/Account/Logout`).then(() => { this.$router.push('/login') })
     }
   }
-
 };
 </script>
 
